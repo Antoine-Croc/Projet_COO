@@ -1,19 +1,17 @@
 package model.observable;
 
 
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import model.BoardGames;
-import model.Coord;
 import model.Couleur;
 import model.Echiquier;
 
 
 /**
  * @author francoise.perrin
- * 
+ *
  * Cette classe est fortement couplée à un Echiquier qu'elle crée
  * Elle le rend  Observable et en simplifie l'interface
  * (DP Proxy, Facade, Observer)
@@ -30,7 +28,7 @@ public class ChessGame extends Observable implements BoardGames{
 	public ChessGame() {
 		super();
 		this.echiquier = new Echiquier();
-		this.notifyObservers(echiquier.getPiecesIHM()); 
+		this.notifyObservers(echiquier.getPiecesIHM());
 	}
 
 
@@ -41,14 +39,14 @@ public class ChessGame extends Observable implements BoardGames{
 	public String toString() {
 		String st = "";
 		st += "\n" + echiquier.getMessage() + "\n";
-		st = echiquier.toString();	
+		st = echiquier.toString();
 		return  st;
 	}
 
 
 	/**
 	 * Permet de deplacer une piece connaissant ses coordonnees initiales vers ses
-	 * coordonnees finales si le deplacement est "legal". 
+	 * coordonnees finales si le deplacement est "legal".
 	 * Si deplacement OK, permet l'alternance des joueurs.
 	 * @param xInit
 	 * @param yInit
@@ -58,7 +56,7 @@ public class ChessGame extends Observable implements BoardGames{
 	 * si OK, permet l'alternance des joueurs
 	 */
 	public boolean move (int xInit, int yInit, int xFinal, int yFinal){
-		boolean ret = false; 
+		boolean ret = false;
 
 		ret = echiquier.isMoveOk(xInit, yInit, xFinal, yFinal);
 		if (ret){
@@ -66,14 +64,14 @@ public class ChessGame extends Observable implements BoardGames{
 		}
 		if (ret){
 			echiquier.switchJoueur();
-		}		
-		
-		this.notifyObservers(echiquier.getPiecesIHM()); 
-		return ret;	
+		}
+
+		this.notifyObservers(echiquier.getPiecesIHM());
+		return ret;
 	}
 
 	public boolean isEnd(){
-		return echiquier.isEnd();		
+		return echiquier.isEnd();
 	}
 
 	public String getMessage() {
@@ -81,15 +79,15 @@ public class ChessGame extends Observable implements BoardGames{
 	}
 
 
-	public Couleur getColorCurrentPlayer(){		
-		return echiquier.getColorCurrentPlayer();		
-	}	
+	public Couleur getColorCurrentPlayer(){
+		return echiquier.getColorCurrentPlayer();
+	}
 
 	public Couleur getPieceColor(int x, int y){
 		return echiquier.getPieceColor(x, y);
 	}
 
-	
+
 
 	/* (non-Javadoc)
 	 * @see java.util.Observable#notifyObservers(java.lang.Object)
@@ -97,7 +95,7 @@ public class ChessGame extends Observable implements BoardGames{
 	@Override
 	public void	notifyObservers(Object arg) {
 		super.setChanged();
-		super.notifyObservers(arg); 
+		super.notifyObservers(arg);
 	}
 
 	/* (non-Javadoc)
@@ -106,6 +104,6 @@ public class ChessGame extends Observable implements BoardGames{
 	@Override
 	public void addObserver(Observer o){
 		super.addObserver(o);
-		this.notifyObservers(echiquier.getPiecesIHM()); 
+		this.notifyObservers(echiquier.getPiecesIHM());
 	}
 }

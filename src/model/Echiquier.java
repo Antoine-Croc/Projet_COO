@@ -2,7 +2,7 @@ package model;
 import java.model.Jeu;
 
 public class Echiquier extends java.lang.Object implements BoardGames {
-	// Noms à vérifier
+	// Noms ï¿½ vï¿½rifier
 	private Jeu jeuNoir;
 	private Jeu jeuBlanc;
 	//Pas besoin de getter et setter car on a switchJoueur : on sait quel est le jeu courant et le jeu non courant
@@ -47,33 +47,33 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 	
 	public boolean isMoveOk(int xInit, int yInit, int xFinal, int yFinal) {
 		boolean ret;
-		//il n'existe pas de piece du jeu courant aux coordonnées initiales
+		//il n'existe pas de piece du jeu courant aux coordonnï¿½es initiales
 		if (Jeu.isPieceHere()) {
 			
 		}
-		// les coordonnées finales ne sont pas valides ou égales aux initiales
+		// les coordonnï¿½es finales ne sont pas valides ou ï¿½gales aux initiales
 		else if {
 					
 		}
-		//position finale ne correspond pas à algo de déplacement piece
+		//position finale ne correspond pas ï¿½ algo de dï¿½placement piece
 		else if {
 					
 		}
-		//il existe une piéce intermédiaire sur la trajectoire (sauf cavalier)
+		//il existe une piï¿½ce intermï¿½diaire sur la trajectoire (sauf cavalier)
 		else if {
 					
 		}
-		//il existe une piéce positionnées aux coordonnées finales :
+		//il existe une piï¿½ce positionnï¿½es aux coordonnï¿½es finales :
 		else if {
-			//si elle est de la méme couleur
+			//si elle est de la mï¿½me couleur
 			if {
 				
 			}
-			//sinon prendre la piéce intermédiaire (vigilance pour le cas du pion) et déplacer la piéce
+			//sinon prendre la piï¿½ce intermï¿½diaire (vigilance pour le cas du pion) et dï¿½placer la piï¿½ce
 			else if {
 				
 			}
-			//sinon déplacer la piéce
+			//sinon dï¿½placer la piï¿½ce
 			else {
 				
 			}
