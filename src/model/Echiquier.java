@@ -47,40 +47,59 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 	
 	public boolean isMoveOk(int xInit, int yInit, int xFinal, int yFinal) {
 		boolean ret;
-		//il n'existe pas de piece du jeu courant aux coordonnï¿½es initiales
-		if (Jeu.isPieceHere()) {
-			
+		Jeu Jeu;
+		if (this.getColorCurrentPlayer() == Couleur.BLANC) {
+			Jeu = this.jeuBlanc;
 		}
-		// les coordonnï¿½es finales ne sont pas valides ou ï¿½gales aux initiales
-		else if {
-					
+		else {
+			Jeu = this.jeuNoir;
 		}
-		//position finale ne correspond pas ï¿½ algo de dï¿½placement piece
-		else if {
-					
+		//il n'existe pas de piece du jeu courant aux coordonnees initiales
+		// TODO 
+		// vérifier si condition sur jeu courant
+		if (!(Jeu.isPieceHere(xInit,yInit) && Jeu.getPieceColor() != this.joueurCourant)) {
+			ret = false;
 		}
-		//il existe une piï¿½ce intermï¿½diaire sur la trajectoire (sauf cavalier)
-		else if {
-					
+		// les coordonnees finales ne sont pas valides ou egales aux initiales
+		//TODO vérifier si possible condition sur couple de valeurs
+		else if (!(Jeu.isMoveOk()) || (xInit == xFinal && yInit == yFinal)) {
+			ret	= false;	
 		}
-		//il existe une piï¿½ce positionnï¿½es aux coordonnï¿½es finales :
-		else if {
-			//si elle est de la mï¿½me couleur
-			if {
-				
+		//position finale ne correspond pas a algo de deplacement piece
+		else if (!(Jeu.findPiece(xInit,yInit).isMoveOk(xFinal,yFinal))) {
+			ret = false;		
+		}
+		//il existe une piece intermediaire sur la trajectoire (sauf cavalier)
+		//TODO trouver la bonne fonction
+		else if (Jeu.move()) {
+			if 	(Jeu.getPieceType(xInit,yInit).equals("Cavalier")) {
+				ret = true;
 			}
-			//sinon prendre la piï¿½ce intermï¿½diaire (vigilance pour le cas du pion) et dï¿½placer la piï¿½ce
-			else if {
-				
+			ret = false;
+		}
+		//il existe une piece positionnees aux coordonnees finales :
+		else if (Jeu.isPieceHere(xFinal,yFinal)) {
+			//si elle est de la meme couleur
+			if (Jeu.getPieceColor(xInit,yInit) == (Jeu.getPieceColor(xFinal,yFinal))){
+				if (Jeu.setCastling()) { s
+				ret = true;
+				}
+				ret = false;
 			}
-			//sinon dï¿½placer la piï¿½ce
-			else {
-				
+			//sinon prendre la piece intermediaire (vigilance pour le cas du pion) et deplacer la piece
+			else if (Jeu.setPossibleCapture()) {
+				if (Jeu.isPawnPromotion(xFinal,yFinal)) {
+					//TODO vérifier comment mettre en place le type
+					Jeu.pawnPromotion(xFinal,yFinal,type);
+				}
+				ret = Jeu.capture(xFinal,yFinal);
 			}
 		}
-			
-			
-		
+		//sinon deplacer la piece
+		else {
+			ret = this.move(xInit,yInit,xFinal,yFinal);//ret = true si déplacement effectué	
+		}
+
 		return ret;
 	}
 
