@@ -15,7 +15,7 @@ public abstract class AbstractPiece implements Pieces{
         this.name = this.getClass().getSimpleName();
     }
 
-    //getteur
+    //getter
 
     //indice de la colonne où est positionnée la piece
     public int getX(){
@@ -63,7 +63,7 @@ public abstract class AbstractPiece implements Pieces{
     public static void main(String[] args) {
         Coord coord = new Coord(2,2);
         Tour tour = new Tour(Couleur.BLANC,coord);
-        System.out.println(tour);
+        System.out.println(tour.getX());
         System.out.println(tour.isMoveOk(3,3));
     }
 }
