@@ -50,7 +50,7 @@ public class Jeu {
  
 //TODO getPiecesIHM
     public java.util.List<PieceIHM> getPiecesIHM(){
-    	
+    	return null;
     }
     
     

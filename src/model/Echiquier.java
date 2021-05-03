@@ -76,7 +76,7 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 		}
 		// les coordonnees finales ne sont pas valides ou egales aux initiales
 		//TODO vérifier si possible condition sur couple de valeurs
-		else if (!(Jeu.isMoveOk()) || (xInit == xFinal && yInit == yFinal)) {
+		else if (!(Jeu.isMoveOk(xInit,yInit,xFinal,yFinal)) || (xInit == xFinal && yInit == yFinal)) {
 			ret	= false;	
 		}
 		//position finale ne correspond pas a algo de deplacement piece
