@@ -66,7 +66,7 @@ public abstract class AbstractPiece implements Pieces{
         Coord coord = new Coord(2,2);
         Tour tour = new Tour(Couleur.BLANC,coord);
         System.out.println("-------------test"+tour+"-------------");
-        Coord coordTest = new Coord(3,3);
+        Coord coordTest = new Coord(3,3); //False
         System.out.println("tour peut se déplacer à"+coordTest +"?->" +tour.isMoveOk(coordTest.x,coordTest.y));
         coordTest = new Coord(2,5);
         System.out.println("tour peut se déplacer à"+coordTest +"?->" +tour.isMoveOk(coordTest.x,coordTest.y));
@@ -81,7 +81,7 @@ public abstract class AbstractPiece implements Pieces{
         System.out.println("Roi peut se déplacer à"+coordTest +"?->" +roi.isMoveOk(coordTest.x,coordTest.y));
         coordTest = new Coord(1,2);
         System.out.println("Roi peut se déplacer à"+coordTest +"?->" +roi.isMoveOk(coordTest.x,coordTest.y));
-        coordTest = new Coord(1,4);
+        coordTest = new Coord(1,4);//false
         System.out.println("Roi peut se déplacer à"+coordTest +"?->" +roi.isMoveOk(coordTest.x,coordTest.y));
 
         Reine reine = new Reine(Couleur.BLANC,coord);
@@ -92,9 +92,44 @@ public abstract class AbstractPiece implements Pieces{
         System.out.println("Reine peut se déplacer à"+coordTest +"?->" +reine.isMoveOk(coordTest.x,coordTest.y));
         coordTest = new Coord(0,3);
         System.out.println("Reine peut se déplacer à"+coordTest +"?->" +reine.isMoveOk(coordTest.x,coordTest.y));
-        coordTest = new Coord(0,4);
+        coordTest = new Coord(0,4);//false
         System.out.println("Reine peut se déplacer à"+coordTest +"?->" +reine.isMoveOk(coordTest.x,coordTest.y));
-
+        
+        Cavalier cavalier = new Cavalier(Couleur.BLANC,coord);
+        System.out.println("-------------test"+cavalier+"-------------");
+        coordTest = new Coord(3,1);
+        System.out.println("cavalier peut se déplacer à"+coordTest +"?->" +cavalier.isMoveOk(coordTest.x,coordTest.y));
+        coordTest = new Coord(1,1);
+        System.out.println("cavalier peut se déplacer à"+coordTest +"?->" +cavalier.isMoveOk(coordTest.x,coordTest.y));
+        coordTest = new Coord(1,3);
+        System.out.println("cavalier peut se déplacer à"+coordTest +"?->" +cavalier.isMoveOk(coordTest.x,coordTest.y));
+        coordTest = new Coord(0,3); //FALSE
+        System.out.println("cavalier peut se déplacer à"+coordTest +"?->" +cavalier.isMoveOk(coordTest.x,coordTest.y));
+        
+        Fou fou = new Fou(Couleur.BLANC,coord);
+        System.out.println("-------------test"+fou+"-------------");
+        coordTest = new Coord(4,0);
+        System.out.println("Fou peut se déplacer à"+coordTest +"?->" +fou.isMoveOk(coordTest.x,coordTest.y));
+        coordTest = new Coord(0,4);
+        System.out.println("Fou peut se déplacer à"+coordTest +"?->" +fou.isMoveOk(coordTest.x,coordTest.y));
+        coordTest = new Coord(0,0);
+        System.out.println("Fou peut se déplacer à"+coordTest +"?->" +fou.isMoveOk(coordTest.x,coordTest.y));
+        coordTest = new Coord(3,3); //FALSE
+        System.out.println("Fou peut se déplacer à"+coordTest +"?->" +fou.isMoveOk(coordTest.x,coordTest.y));
+        
+        PionBis pion = new PionBis(Couleur.BLANC,coord);
+        System.out.println("-------------test "+pion+"------------");
+        coordTest = new Coord(2,3);
+        System.out.println("Pion peut se déplacer à"+coordTest +"?->" +pion.isMoveOk(coordTest.x,coordTest.y));
+        coordTest = new Coord(1,4);
+        System.out.println("Pion peut se déplacer à"+coordTest +"?->" +pion.isMoveOk(coordTest.x,coordTest.y));
+        coordTest = new Coord(0,0);
+        System.out.println("Pion peut se déplacer à"+coordTest +"?->" +pion.isMoveOk(coordTest.x,coordTest.y));
+        coordTest = new Coord(2,1); //FALSE
+        System.out.println("Pion peut se déplacer à"+coordTest +"?->" +pion.isMoveOk(coordTest.x,coordTest.y));
+        
+        
+        
         
     }
 }

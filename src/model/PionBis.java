@@ -5,9 +5,9 @@ package model;
  * 
  */
 
-public class Pion extends AbstractPiece {
+public class PionBis extends AbstractPiece {
 
-	public Pion(Couleur couleur_de_piece, Coord coord) {
+	public PionBis(Couleur couleur_de_piece, Coord coord) {
 		super(couleur_de_piece, coord);
 		/*
 		 * Constructeur

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import tools.ChessPiecesFactory;
+import tools.Introspection;
 
 public class Jeu {
 	private List<Pieces> list_pieces;
@@ -95,17 +96,7 @@ public class Jeu {
 
 	// true si une pièce se trouve aux coordonnÃ©es indiquÃ©es
 	public boolean isPieceHere(int x, int y) {
-		boolean result = false;
-		Iterator<Pieces> ite = this.list_pieces.iterator();
-		while (ite.hasNext()) {
-			Pieces piece = ite.next();
-			if (piece.getX() == x && piece.getY() == y) {
-				result = true;
-				break;
-			}
-		}
-
-		return result;
+		return findPiece(x, y) != null? true:false;
 	}
 
 
@@ -179,27 +170,36 @@ public class Jeu {
 		return nomType;
 
 	}
-
+//TODO à voir
 	// true si on est bien dans le cas d'une promotion du pion
 	public boolean isPawnPromotion(int xFinal, int yfinal) {
-		Boolean result = false;
-		// on vérifie juste la position ( pas de vérification de la classe)
-		if ((getCouleur() == Couleur.BLANC && yfinal == 0) || (getCouleur() == Couleur.NOIR && yfinal == 7)) {
-			result = true;
+
+		if (yfinal == 7) {
+			Pieces pieceC = findPieces(xFinal, yfinal);
+			if (pieceC != null && pieceC instanceof Tour) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
 		}
-		return result;
 	}
 
 	// true si promotion OK
-	public boolean pawnPromotion(int xFinal, int yfinal, java.lang.String type) {
-		Boolean result = false;
-		Set<String> allTypes = new HashSet<>(Arrays.asList("Tour", "Reine", "Fou", "Cavalier"));
-
-		// si la position est bon et le type à remplacer est bon aussi
-		if (isPawnPromotion(xFinal, yfinal) && allTypes.contains(type)) {
-			result = true;
+	public boolean pawnPromotion(int xFinal, int yfinal, String type) {
+		if (this.isPawnPromotion(xFinal, yfinal)) {
+			Pieces pieceC = findPieces(xFinal, yfinal);
+			this.pieces.remove(pieceC);
+			String className = "model." + type;
+			Coord pieceCoord = new Coord(xFinal,yfinal);
+			pieces.add((Pieces) Introspection.newInstance (className,
+					new Object[] {this.couleur, pieceCoord}));
+			return true;
+		} else {
+			return false;
 		}
-		return result;
+
 	}
 	
 	public void setCastling() {
