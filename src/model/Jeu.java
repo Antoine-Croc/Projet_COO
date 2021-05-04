@@ -96,7 +96,7 @@ public class Jeu {
 
 	// true si une piËce se trouve aux coordonn√©es indiqu√©es
 	public boolean isPieceHere(int x, int y) {
-		return findPieces(x, y) != null? true:false;
+		return findPieces(x, y) != null;
 	}
 
 
@@ -172,34 +172,33 @@ public class Jeu {
 	}
 //TODO ‡ voir
 	// true si on est bien dans le cas d'une promotion du pion
-	public boolean isPawnPromotion(int xFinal, int yfinal) {
-
-		if (yfinal == 7) {
-			Pieces pieceC = findPieces(xFinal, yfinal);
+	public boolean isPawnPromotion(int xFinal, int yFinal) {
+		Boolean resultat = false;
+		if ( (getCouleur() == Couleur.BLANC && yFinal == 0 )
+				|| (getCouleur() == Couleur.NOIR && yFinal == 7 ) ) {
+			
+			Pieces pieceC = findPieces(xFinal, yFinal);
 			if (pieceC != null && pieceC instanceof Tour) {
-				return true;
-			} else {
-				return false;
+				resultat = true;
 			}
-		} else {
-			return false;
-		}
+			} 
+		return resultat;
 	}
 
 	// true si promotion OK
 	public boolean pawnPromotion(int xFinal, int yfinal, String type) {
-		if (this.isPawnPromotion(xFinal, yfinal)) {
+		Boolean resultat = false;
+		Set<String> allTypes = new HashSet<>(Arrays.asList("Tour","Reine","Fou","Cavalier"));
+		if (this.isPawnPromotion(xFinal, yfinal) && allTypes.contains(type)) {
 			Pieces pieceC = findPieces(xFinal, yfinal);
 			this.pieces.remove(pieceC);
 			String className = "model." + type;
 			Coord pieceCoord = new Coord(xFinal,yfinal);
 			pieces.add((Pieces) Introspection.newInstance (className,
 					new Object[] {this.couleur, pieceCoord}));
-			return true;
-		} else {
-			return false;
-		}
-
+			resultat = true;
+		} 
+		return resultat;
 	}
 	
 	public void setCastling() {
