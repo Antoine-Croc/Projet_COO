@@ -14,10 +14,12 @@ public class Jeu {
 	private Couleur couleur;
 	private boolean roque_roi  = false;
 	private boolean capture_possible = false;
+	
 	// constructor
 	public Jeu(Couleur couleur) {
 		this.list_pieces = ChessPiecesFactory.newPieces(couleur);
 		this.couleur = couleur;
+
 	}
 
 	// getter & setter
@@ -41,6 +43,13 @@ public class Jeu {
 		return coord;
 	}
 
+	public boolean getRoque() {
+		return this.roque_roi;
+	}
+	
+	public boolean getCapturePossible() {
+		return this.capture_possible;
+	}
 	@Override
 	public java.lang.String toString() {
 		String result = "";
