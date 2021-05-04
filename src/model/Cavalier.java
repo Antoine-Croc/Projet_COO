@@ -1,34 +1,26 @@
 package model;
 
-/**
- * @author francoise.perrin Inspiration Jacques SARAYDARYAN, Adrien GUENARD *
- * 
- */
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Cavalier extends AbstractPiece {
-
-	public Cavalier(Couleur couleur_de_piece, Coord coord) {
-		super(couleur_de_piece, coord);
+	public Cavalier(Couleur couleur, Coord coord) {
+		super(couleur, coord);
 
 	}
 
+	@Override
 	public boolean isMoveOk(int xFinal, int yFinal) {
-		boolean resultat = false;
-		int X = xFinal - this.getX();
-		int Y = xFinal - this.getY();
-		int mov = 0;
-		if ((X * X == 4 && Y * Y == 1)) {
-			mov = 1;
-		} else if ((X * X == 1 && Y * Y == 4)) {
-			mov = 1;
-			if (mov == 1) {
-				resultat = true;
-			} else {
-				resultat = false;
-			}
-
+		int compareX = xFinal - super.getX();
+		int compareY = yFinal - super.getY();
+		Integer[] val = { -1, -2, 1, 2 };
+		List<Integer> intList = new ArrayList<>(Arrays.asList(val));
+		if ((intList.contains(compareX)) && (intList.contains(compareX)) && (compareX != compareY) &&(compareX != -compareY)) {
+			return true;
+		} else {
+			return false;
 		}
 
-		return resultat;
 	}
 }
