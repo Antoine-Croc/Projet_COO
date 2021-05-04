@@ -106,11 +106,11 @@ public abstract class AbstractPiece implements Pieces{
         coordTest = new Coord(0,3); //True
         System.out.println("cavalier peut se d�placer �"+coordTest +"?->" +cavalier.isMoveOk(coordTest.x,coordTest.y));
         
-        FouBis fou = new FouBis(Couleur.BLANC,coord);
+        Fou fou = new Fou(Couleur.BLANC,coord);
         System.out.println("-------------test"+fou+"-------------");
         coordTest = new Coord(4,0);
         System.out.println("Fou peut se d�placer �"+coordTest +"?->" +fou.isMoveOk(coordTest.x,coordTest.y));
-        coordTest = new Coord(0,4);
+        coordTest = new Coord(1,4);
         System.out.println("Fou peut se d�placer �"+coordTest +"?->" +fou.isMoveOk(coordTest.x,coordTest.y));
         coordTest = new Coord(0,0);
         System.out.println("Fou peut se d�placer �"+coordTest +"?->" +fou.isMoveOk(coordTest.x,coordTest.y));
