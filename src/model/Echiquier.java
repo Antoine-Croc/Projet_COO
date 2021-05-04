@@ -45,7 +45,6 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 		for (int i=0;i<Jeu.getPiecesIHM().size();i++) {
 			PieceIHM.add(Jeu.getPiecesIHM().get(i)); //On récupère le i-eme élément
 		}
-		//TODO vérifier comment donner des accès en écriture
 		return PieceIHM;
 	}
 	
@@ -55,8 +54,18 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 	
 	@Override
 	public boolean isEnd() {
-		// TODO 
-		return false;
+		Jeu Jeu;
+		boolean ret = false;
+		if (this.getColorCurrentPlayer() == Couleur.BLANC) {
+			Jeu = this.jeuBlanc;
+		}
+		else {
+			Jeu = this.jeuNoir;
+		}
+		if (Jeu.isCheckMate) {
+			ret = true;
+		}
+		return ret;
 	}
 	
 	public boolean isMoveOk(int xInit, int yInit, int xFinal, int yFinal) {
@@ -69,33 +78,30 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 			Jeu = this.jeuNoir;
 		}
 		//il n'existe pas de piece du jeu courant aux coordonnees initiales
-		// TODO 
-		// vérifier si condition sur jeu courant
 		if (!(Jeu.isPieceHere(xInit,yInit) && this.getPieceColor(xInit,yInit) != this.joueurCourant)) {
 			ret = false;
 		}
 		// les coordonnees finales ne sont pas valides ou egales aux initiales
-		//TODO vérifier si possible condition sur couple de valeurs
-		else if (!(Jeu.isMoveOk(xInit,yInit,xFinal,yFinal)) || (xInit == xFinal && yInit == yFinal)) {
+		//position finale ne correspond pas a algo de deplacement piece
+		else if (!(Jeu.isMoveOk(xInit,yInit,xFinal,yFinal))) {
 			ret	= false;	
 		}
-		//position finale ne correspond pas a algo de deplacement piece
-		else if (!(Jeu.findPiece(xInit,yInit).isMoveOk(xFinal,yFinal))) {
-			ret = false;		
-		}
+	
 		//il existe une piece intermediaire sur la trajectoire (sauf cavalier)
 		//TODO trouver la bonne fonction
+		/*
 		else if (Jeu.intermediatePiece()) {
 			if 	(Jeu.getPieceType(xInit,yInit).equals("Cavalier")) {
 				ret = true;
 			}
 			ret = false;
 		}
+		*/
 		//il existe une piece positionnees aux coordonnees finales :
 		else if (Jeu.isPieceHere(xFinal,yFinal)) {
 			//si elle est de la meme couleur
 			if (Jeu.getPieceColor(xInit,yInit) == (Jeu.getPieceColor(xFinal,yFinal))){
-				if (Jeu.setCastling()) {
+				if (Jeu.castlingOk) {
 				ret = true;
 				}
 				ret = false;
@@ -103,8 +109,7 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 			//sinon prendre la piece intermediaire (vigilance pour le cas du pion) et deplacer la piece
 			else {
 				if (Jeu.isPawnPromotion(xFinal,yFinal)) {
-					//TODO vérifier comment mettre en place le type
-					Jeu.pawnPromotion(xFinal,yFinal,type);
+					ret = false;
 				}
 				Jeu.setPossibleCapture();//ret = true si capture possible
 				ret = true;
@@ -114,7 +119,12 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 		else {
 			ret = true;
 		}
-
+		if (ret) {
+			this.setMessage("Déplacement Ok");
+		}
+		else {
+			this.setMessage("Déplacement interdit");
+		}
 		return ret;
 	}
 
