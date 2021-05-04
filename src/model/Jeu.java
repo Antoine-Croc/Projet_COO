@@ -226,7 +226,7 @@ public class Jeu {
 */
 		this.roque_roi=true;
 	}
-	private Pieces findPiece(int xInit,int yInit) {
+	private Pieces findPieces(int xInit,int yInit) {
 		Pieces piece_resultat = null;
 		Iterator<Pieces> ite = this.list_pieces.iterator();
 		while (ite.hasNext()) {
