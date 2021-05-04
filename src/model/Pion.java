@@ -6,11 +6,11 @@ package model;
  */
 
 
-public class Pion implements Pieces{
+public class Pion extends AbstractPiece{
 	
 	public Pion(Couleur couleur_de_piece, Coord coord) {
-		super(couleur_de_piece);
-		super(coord);
+		super(couleur_de_piece,coord);
+
 		/*
 		 * Constructeur
 		 */
@@ -20,7 +20,7 @@ public class Pion implements Pieces{
 		int X = xFinal-this.getX();
 		int Y = xFinal-this.getY();
 		int mov = 0;
-		if (this.getCouleur() == "black") {			
+		if (this.getCouleur() == Couleur.NOIR) {			
 			if (this.getY() == 6) {
 				if (Y == -1 || Y == -2) {
 					mov = 1;
@@ -31,7 +31,7 @@ public class Pion implements Pieces{
 				}
 			}
 		}
-		if (this.getCouleur() == "white") {			
+		if (this.getCouleur() == Couleur.BLANC) {			
 			if (this.getY() == 1) {
 				if (Y == 1 || Y == 2) {
 					mov = 1;
@@ -43,7 +43,7 @@ public class Pion implements Pieces{
 			}
 		}
 		if (mov==1) {
-			return true
+			return true;
 		}else {
 			return false;
 		}
