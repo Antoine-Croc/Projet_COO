@@ -13,6 +13,7 @@ public class Jeu {
 	private List<Pieces> list_pieces;
 	private Couleur couleur;
 	private boolean roque_roi  = false;
+	private boolean capture_possible = false;
 	// constructor
 	public Jeu(Couleur couleur) {
 		this.list_pieces = ChessPiecesFactory.newPieces(couleur);
@@ -133,7 +134,7 @@ public class Jeu {
 //TODO  in 2nd iteration
 	// Si une capture d'une pièce de l'autre jeu est possible met à jour 1 booléen
 	public void setPossibleCapture() {
-
+		this.capture_possible = false;
 	}
 
 //TODO in 2nd  iteration
