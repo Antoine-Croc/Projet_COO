@@ -16,7 +16,7 @@ public class Roi extends AbstractPiece {
     // en se déplaçant sur la case qu’elle occupe, et la pièce prise est retirée de l’échiquier.
     public boolean isMoveOk(int xFinal, int yFinal) {
         boolean ans = false;
-        if(this.getX() != xFinal && this.getY() != yFinal) {
+        if(!(this.getX() == xFinal && this.getY() == yFinal)) {
             //true si déplacement légal en fonction des algo de déplacement spécifique de chaque pièce
             if (Math.abs(this.getX() - xFinal) <= 1 && Math.abs(this.getY() - yFinal) <= 1) {
                 ans = true;

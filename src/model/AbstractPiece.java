@@ -65,11 +65,36 @@ public abstract class AbstractPiece implements Pieces{
     public static void main(String[] args) {
         Coord coord = new Coord(2,2);
         Tour tour = new Tour(Couleur.BLANC,coord);
-        System.out.println(tour);
+        System.out.println("-------------test"+tour+"-------------");
         Coord coordTest = new Coord(3,3);
         System.out.println("tour peut se déplacer à"+coordTest +"?->" +tour.isMoveOk(coordTest.x,coordTest.y));
         coordTest = new Coord(2,5);
         System.out.println("tour peut se déplacer à"+coordTest +"?->" +tour.isMoveOk(coordTest.x,coordTest.y));
+        coordTest = new Coord(3,2);
+        System.out.println("tour peut se déplacer à"+coordTest +"?->" +tour.isMoveOk(coordTest.x,coordTest.y));
+        
+        Roi roi = new Roi(Couleur.BLANC,coord);
+        System.out.println("-------------test"+roi+"-------------");
+        coordTest = new Coord(3,3);
+        System.out.println("Roi peut se déplacer à"+coordTest +"?->" +roi.isMoveOk(coordTest.x,coordTest.y));
+        coordTest = new Coord(2,3);
+        System.out.println("Roi peut se déplacer à"+coordTest +"?->" +roi.isMoveOk(coordTest.x,coordTest.y));
+        coordTest = new Coord(1,2);
+        System.out.println("Roi peut se déplacer à"+coordTest +"?->" +roi.isMoveOk(coordTest.x,coordTest.y));
+        coordTest = new Coord(1,4);
+        System.out.println("Roi peut se déplacer à"+coordTest +"?->" +roi.isMoveOk(coordTest.x,coordTest.y));
+
+        Reine reine = new Reine(Couleur.BLANC,coord);
+        System.out.println("-------------test"+reine+"-------------");
+        coordTest = new Coord(2,5);
+        System.out.println("Reine peut se déplacer à"+coordTest +"?->" +reine.isMoveOk(coordTest.x,coordTest.y));
+        coordTest = new Coord(3,2);
+        System.out.println("Reine peut se déplacer à"+coordTest +"?->" +reine.isMoveOk(coordTest.x,coordTest.y));
+        coordTest = new Coord(0,3);
+        System.out.println("Reine peut se déplacer à"+coordTest +"?->" +reine.isMoveOk(coordTest.x,coordTest.y));
+        coordTest = new Coord(0,4);
+        System.out.println("Reine peut se déplacer à"+coordTest +"?->" +reine.isMoveOk(coordTest.x,coordTest.y));
+
         
     }
 }

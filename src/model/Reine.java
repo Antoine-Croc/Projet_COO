@@ -14,14 +14,14 @@ public class Reine extends AbstractPiece {
     // la dame capture en occupant la case occupée par une pièce adverse.
     public boolean isMoveOk(int xFinal, int yFinal) {
         boolean ans = false;
-        if(this.getX() != xFinal && this.getY() != yFinal) {
+        if(!(this.getX() == xFinal && this.getY() == yFinal)) {
             //true si déplacement légal en fonction des algo de déplacement spécifique de chaque pièce
             //si horizontalement ou verticalement
             if (this.getX() == xFinal | this.getY() == yFinal){
                 ans = true;
             }
             //si diagonalement
-            else if (Math.abs(this.getX() - xFinal) == 1 && Math.abs(this.getY() - yFinal) == 1){
+            else if (Math.abs(this.getX() - xFinal) == Math.abs(this.getY() - yFinal)){
                 ans = true;
             }
         }
