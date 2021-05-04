@@ -37,11 +37,11 @@ public abstract class AbstractChessGameControler implements ChessGameControlers 
 	final public boolean move(Coord initCoord, Coord finalCoord) {
 		boolean ret = false;
 		String promotionType = null; 
-
+		
 		// si c'est bien au tour du joueur courant de jouer
 		if (this.isPlayerOK(initCoord)) {
-
-			// Déplacement métier
+			
+			// Deplacement metier
 			ret = this.moveModel(initCoord, finalCoord);	 
 
 			// Actions différentes selon les types de controleur

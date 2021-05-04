@@ -17,6 +17,7 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 		this.jeuNoir = new Jeu(Couleur.NOIR);
 		this.jeuBlanc = new Jeu(Couleur.BLANC);
 		this.joueurCourant = Couleur.BLANC;
+		this.message = "Bienvenue dans le jeu d'echecs du module de COO";
 	}
 	
 	@Override
@@ -31,7 +32,14 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 	
 	@Override
 	public Couleur getPieceColor(int x, int y) {
-		return this.jeuBlanc.getPieceColor(x,y);
+		Couleur ret;
+		if (this.joueurCourant == Couleur.BLANC) {
+			ret = this.jeuBlanc.getPieceColor(x,y);
+		}
+		else {
+			ret = this.jeuNoir.getPieceColor(x,y);
+		}
+		return ret;
 	}
 	
 	public List<PieceIHM> getPiecesIHM(){
@@ -81,12 +89,14 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 			jeu = this.jeuNoir;
 		}
 		//il n'existe pas de piece du jeu courant aux coordonnees initiales
-		if (!(jeu.isPieceHere(xInit,yInit) && this.getPieceColor(xInit,yInit) != this.joueurCourant)) {
+		if (!(jeu.isPieceHere(xInit,yInit) || this.getPieceColor(xInit,yInit) != this.joueurCourant)) {
+			this.setMessage("Pas de pièces aux coordonnées initiales");
 			ret = false;
 		}
 		// les coordonnees finales ne sont pas valides ou egales aux initiales
 		//position finale ne correspond pas a algo de deplacement piece
 		else if (!(jeu.isMoveOk(xInit,yInit,xFinal,yFinal))) {
+			this.setMessage("Problème algo déplacement");
 			ret	= false;	
 		}
 	
@@ -107,11 +117,13 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 				if (jeu.getRoque()) {
 				ret = true;
 				}
+				this.setMessage("Piece présente aux coordonnees finales");
 				ret = false;
 			}
 			//sinon prendre la piece intermediaire (vigilance pour le cas du pion) et deplacer la piece
 			else {
 				if (jeu.isPawnPromotion(xFinal,yFinal)) {
+					this.setMessage("Possibilité de promotion du pion");
 					ret = false;
 				}
 				jeu.setPossibleCapture();//ret = true si capture possible
@@ -122,12 +134,14 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 		else {
 			ret = true;
 		}
+		/*
 		if (ret) {
-			this.setMessage("Déplacement Ok");
+			this.setMessage("Deplacement OK");
 		}
 		else {
-			this.setMessage("Déplacement interdit");
+			this.setMessage("Deplacement interdit");
 		}
+		*/
 		return ret;
 	}
 
@@ -146,6 +160,10 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 			jeu.move(xInit, yInit, xFinal, yFinal);
 			if (jeu.getCapturePossible()) {
 				jeu.capture(xFinal,yFinal);
+				this.setMessage("Déplacement avec capture");
+			}
+			else {
+				this.setMessage("Déplacement sans capture");
 			}
 			ret = true;//Jusque la et si pas de possibilité de mise en échec, le déplacement est effectué
 			Coord KingCoord = jeu.getKingCoord();
@@ -160,6 +178,7 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 			*/
 		}
 		else {
+			
 			ret = false;
 		}
 		return ret;
