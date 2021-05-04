@@ -98,22 +98,16 @@ public class Jeu {
 		return result;
 	}
 
+
 	// true si piece du jeu peut être déplacée aux coordonnées finales, false sinon
 	public boolean isMoveOk(int xInit, int yInit, int xFinal, int yFinal) {
 		boolean result = false;
-		Iterator<Pieces> ite = this.list_pieces.iterator();
-		while (ite.hasNext()) {
-			Pieces piece = ite.next();
-			// trouver la pièce située à la position(xInit,yInit)
-			if (piece.getX() == xInit && piece.getY() == xInit) {
-				// si la piece peut y deplacer
-				if (piece.isMoveOk(xFinal, yFinal)) {
+		Pieces piece = findPiece( xInit, yInit) ; 
+		if(piece != null) {
+			if (piece.isMoveOk(xFinal, yFinal)) {
 					result = true;
-					break;
 				}
 			}
-		}
-
 		return result;
 	}
 
@@ -121,12 +115,17 @@ public class Jeu {
 	// true si déplacement pièce effectué
 	public boolean move(int xInit, int yInit, int xFinal, int yFinal) {
 		boolean result = false;
+		Pieces piece = findPiece( xInit, yInit) ; 
+		if (piece !=null && piece.isMoveOk(xFinal, yFinal)) {
+			piece.move(xFinal, yFinal);
+			result = true;
+		}
 
 		return result;
 
 	}
 
-	// TODO undoMove()
+// TODO in 2nd iteration
 	public void undoMove() {
 
 	}
@@ -153,25 +152,19 @@ public class Jeu {
 	// couleur de la pièce aux coordonnées x, y
 	public Couleur getPieceColor(int x, int y) {
 		Couleur couleur = null;
-		Iterator<Pieces> ite = this.list_pieces.iterator();
-		while (ite.hasNext()) {
-			Pieces piece = ite.next();
-			if (piece.getX() == x && piece.getY() == y) {
+		Pieces piece = findPiece( x, y) ; 
+			if (piece !=null) {
 				couleur = piece.getCouleur();
 			}
-		}
 		return couleur;
 	}
 
 	// type de la piece aux coordonnees x,y c'est a dire le nom de la classe
 	public java.lang.String getPieceType(int x, int y) {
 		String nomType = null;
-		Iterator<Pieces> ite = this.list_pieces.iterator();
-		while (ite.hasNext()) {
-			Pieces piece = ite.next();
-			if (piece.getX() == x && piece.getY() == y) {
+		Pieces piece = findPiece( x, y) ; 
+		if (piece !=null) {
 				nomType = piece.getClass().getSimpleName();
-			}
 		}
 		return nomType;
 
@@ -198,5 +191,20 @@ public class Jeu {
 		}
 		return result;
 	}
+	
+	
+	private Pieces findPiece(int xInit,int yInit) {
+		Pieces piece_resultat = null;
+		Iterator<Pieces> ite = this.list_pieces.iterator();
+		while (ite.hasNext()) {
+			Pieces piece = ite.next();
+			if (piece.getX() == xInit && piece.getY() == yInit) {
+				piece_resultat = piece;
+				break;
+			}
+		}
+		return piece_resultat;
+	}
+	
 
 }

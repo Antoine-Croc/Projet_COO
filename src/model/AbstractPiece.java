@@ -45,6 +45,8 @@ public abstract class AbstractPiece implements Pieces{
     //true si déplacement effectué
     public boolean move(int xFinal, int yFinal){
         boolean ans = false;
+        coord.x = xFinal;
+        coord.y = yFinal;
         if(getX()==xFinal && getY()==yFinal){
             ans = true;
         }
