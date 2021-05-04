@@ -110,7 +110,7 @@ public abstract class AbstractPiece implements Pieces{
         System.out.println("-------------test"+fou+"-------------");
         coordTest = new Coord(4,0);
         System.out.println("Fou peut se d�placer �"+coordTest +"?->" +fou.isMoveOk(coordTest.x,coordTest.y));
-        coordTest = new Coord(0,4);
+        coordTest = new Coord(1,4);
         System.out.println("Fou peut se d�placer �"+coordTest +"?->" +fou.isMoveOk(coordTest.x,coordTest.y));
         coordTest = new Coord(0,0);
         System.out.println("Fou peut se d�placer �"+coordTest +"?->" +fou.isMoveOk(coordTest.x,coordTest.y));
