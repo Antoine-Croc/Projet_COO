@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Cavalier extends AbstractPiece {
-	public Cavalier(Couleur couleur, Coord coord) {
+public class CavalierBis extends AbstractPiece {
+	public CavalierBis(Couleur couleur, Coord coord) {
 		super(couleur, coord);
-		super.name = "cavalier";
+
 	}
 
 	@Override

@@ -95,7 +95,7 @@ public abstract class AbstractPiece implements Pieces{
         coordTest = new Coord(0,4);//false
         System.out.println("Reine peut se déplacer à"+coordTest +"?->" +reine.isMoveOk(coordTest.x,coordTest.y));
         
-        Cavalier cavalier = new Cavalier(Couleur.BLANC,coord);
+        CavalierBis cavalier = new CavalierBis(Couleur.BLANC,coord);
         System.out.println("-------------test"+cavalier+"-------------");
         coordTest = new Coord(3,1);
         System.out.println("cavalier peut se déplacer à"+coordTest +"?->" +cavalier.isMoveOk(coordTest.x,coordTest.y));
@@ -106,7 +106,7 @@ public abstract class AbstractPiece implements Pieces{
         coordTest = new Coord(0,3); //FALSE
         System.out.println("cavalier peut se déplacer à"+coordTest +"?->" +cavalier.isMoveOk(coordTest.x,coordTest.y));
         
-        Fou fou = new Fou(Couleur.BLANC,coord);
+        FouBis fou = new FouBis(Couleur.BLANC,coord);
         System.out.println("-------------test"+fou+"-------------");
         coordTest = new Coord(4,0);
         System.out.println("Fou peut se déplacer à"+coordTest +"?->" +fou.isMoveOk(coordTest.x,coordTest.y));

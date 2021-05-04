@@ -1,9 +1,9 @@
 package model;
 
-public class Fou extends AbstractPiece {
-	public Fou(Couleur couleur, Coord coord) {
+public class FouBis extends AbstractPiece {
+	public FouBis(Couleur couleur, Coord coord) {
 		super(couleur, coord);
-		super.name = "fou";
+
 	}
 
 	@Override
