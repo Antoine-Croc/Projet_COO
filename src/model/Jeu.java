@@ -11,14 +11,14 @@ import tools.ChessPiecesFactory;
 import tools.Introspection;
 
 public class Jeu {
-	private List<Pieces> list_pieces;
+	private List<Pieces> pieces;
 	private Couleur couleur;
 	private boolean roque_roi  = false;
 	private boolean capture_possible = false;
 	
 	// constructor
 	public Jeu(Couleur couleur) {
-		this.list_pieces = ChessPiecesFactory.newPieces(couleur);
+		this.pieces = ChessPiecesFactory.newPieces(couleur);
 		this.couleur = couleur;
 
 	}
@@ -33,7 +33,7 @@ public class Jeu {
 	// coordonnées du roi
 	public Coord getKingCoord() {
 		Coord coord = null;
-		Iterator<Pieces> ite = this.list_pieces.iterator();
+		Iterator<Pieces> ite = this.pieces.iterator();
 		while (ite.hasNext()) {
 			Pieces piece = ite.next();
 			if (piece.getClass().getSimpleName() == "Roi") {
@@ -54,7 +54,7 @@ public class Jeu {
 	@Override
 	public java.lang.String toString() {
 		String result = "";
-		result = list_pieces.toString();
+		result = pieces.toString();
 		return result;
 	}
 
@@ -67,7 +67,7 @@ public class Jeu {
 		PieceIHM newPieceIHM = null;
 		List<PieceIHM> list = new LinkedList<PieceIHM>();
 
-		for (Pieces piece : list_pieces) {
+		for (Pieces piece : pieces) {
 			boolean existe = false;
 			// si le type de piece existe déjà dans la liste de PieceIHM
 			// ajout des coordonnées de la pièce dans la liste de Coord de ce type
@@ -96,14 +96,14 @@ public class Jeu {
 
 	// true si une pièce se trouve aux coordonnÃ©es indiquÃ©es
 	public boolean isPieceHere(int x, int y) {
-		return findPiece(x, y) != null? true:false;
+		return findPieces(x, y) != null? true:false;
 	}
 
 
 	// true si piece du jeu peut être déplacée aux coordonnées finales, false sinon
 	public boolean isMoveOk(int xInit, int yInit, int xFinal, int yFinal) {
 		boolean result = false;
-		Pieces piece = findPiece( xInit, yInit) ; 
+		Pieces piece = findPieces( xInit, yInit) ; 
 		if(piece != null) {
 			if (piece.isMoveOk(xFinal, yFinal)) {
 					result = true;
@@ -116,7 +116,7 @@ public class Jeu {
 	// true si déplacement pièce effectué
 	public boolean move(int xInit, int yInit, int xFinal, int yFinal) {
 		boolean result = false;
-		Pieces piece = findPiece( xInit, yInit) ; 
+		Pieces piece = findPieces( xInit, yInit) ; 
 		if (piece !=null && piece.isMoveOk(xFinal, yFinal)) {
 			piece.move(xFinal, yFinal);
 			result = true;
@@ -153,7 +153,7 @@ public class Jeu {
 	// couleur de la pièce aux coordonnées x, y
 	public Couleur getPieceColor(int x, int y) {
 		Couleur couleur = null;
-		Pieces piece = findPiece( x, y) ; 
+		Pieces piece = findPieces( x, y) ; 
 			if (piece !=null) {
 				couleur = piece.getCouleur();
 			}
@@ -163,7 +163,7 @@ public class Jeu {
 	// type de la piece aux coordonnees x,y c'est a dire le nom de la classe
 	public java.lang.String getPieceType(int x, int y) {
 		String nomType = null;
-		Pieces piece = findPiece( x, y) ; 
+		Pieces piece = findPieces( x, y) ; 
 		if (piece !=null) {
 				nomType = piece.getClass().getSimpleName();
 		}
@@ -208,7 +208,7 @@ public class Jeu {
 		int position_y_roi = -1;
 		Set<Integer> position_y_tour = new HashSet<>();
 		
-		Iterator<Pieces> ite = this.list_pieces.iterator();
+		Iterator<Pieces> ite = this.pieces.iterator();
 		while (ite.hasNext()) {
 			Pieces piece = ite.next();
 			if (piece.getClass().getSimpleName() == "Roi") {
@@ -228,7 +228,7 @@ public class Jeu {
 	}
 	private Pieces findPieces(int xInit,int yInit) {
 		Pieces piece_resultat = null;
-		Iterator<Pieces> ite = this.list_pieces.iterator();
+		Iterator<Pieces> ite = this.pieces.iterator();
 		while (ite.hasNext()) {
 			Pieces piece = ite.next();
 			if (piece.getX() == xInit && piece.getY() == yInit) {

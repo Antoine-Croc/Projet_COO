@@ -9,16 +9,15 @@ public class PionBis extends AbstractPiece {
 
 	public PionBis(Couleur couleur_de_piece, Coord coord) {
 		super(couleur_de_piece, coord);
-		/*
-		 * Constructeur
-		 */
+
 	}
 
 	public boolean isMoveOk(int xFinal, int yFinal) {
+		boolean resultat = false;
 		int X = xFinal - this.getX();
 		int Y = xFinal - this.getY();
 		int mov = 0;
-		if (this.getCouleur() == Couleur.NOIR) {
+		if (this.getCouleur() == Couleur.BLANC) {
 			if (this.getY() == 6) {
 				if (Y == -1 || Y == -2) {
 					mov = 1;
@@ -29,7 +28,7 @@ public class PionBis extends AbstractPiece {
 				}
 			}
 		}
-		if (this.getCouleur() == Couleur.BLANC) {
+		if (this.getCouleur() == Couleur.NOIR) {
 			if (this.getY() == 1) {
 				if (Y == 1 || Y == 2) {
 					mov = 1;
@@ -41,10 +40,12 @@ public class PionBis extends AbstractPiece {
 			}
 		}
 		if (mov == 1) {
-			return true;
+			resultat= true;
 		} else {
-			return false;
+			resultat= false;
 		}
+		System.out.println("X="+X+" Y="+Y);
+		return resultat;
 	}
 }
 

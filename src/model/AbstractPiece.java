@@ -119,7 +119,7 @@ public abstract class AbstractPiece implements Pieces{
         
         PionBis pion = new PionBis(Couleur.BLANC,coord);
         System.out.println("-------------test "+pion+"------------");
-        coordTest = new Coord(2,3);
+        coordTest = new Coord(2,1);
         System.out.println("Pion peut se déplacer à"+coordTest +"?->" +pion.isMoveOk(coordTest.x,coordTest.y));
         coordTest = new Coord(1,4);
         System.out.println("Pion peut se déplacer à"+coordTest +"?->" +pion.isMoveOk(coordTest.x,coordTest.y));
