@@ -193,10 +193,10 @@ public class Jeu {
 	}
 	
 	public void setCastling() {
+/*
 		Pieces piece_roi = null;
 		int position_y_roi = -1;
 		Set<Integer> position_y_tour = new HashSet<>();
-		
 		
 		Iterator<Pieces> ite = this.list_pieces.iterator();
 		while (ite.hasNext()) {
@@ -213,8 +213,8 @@ public class Jeu {
 		}
 			
 		}
-		
-		
+*/
+		this.roque_roi=true;
 	}
 	private Pieces findPiece(int xInit,int yInit) {
 		Pieces piece_resultat = null;
