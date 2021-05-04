@@ -27,5 +27,7 @@ public class Reine extends AbstractPiece {
         }
         return ans;
     }
+    
+    
 }
 

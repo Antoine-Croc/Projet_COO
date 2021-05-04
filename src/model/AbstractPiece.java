@@ -65,7 +65,11 @@ public abstract class AbstractPiece implements Pieces{
     public static void main(String[] args) {
         Coord coord = new Coord(2,2);
         Tour tour = new Tour(Couleur.BLANC,coord);
-        System.out.println(tour.getX());
-        System.out.println(tour.isMoveOk(3,3));
+        System.out.println(tour);
+        Coord coordTest = new Coord(3,3);
+        System.out.println("tour peut se déplacer à"+coordTest +"?->" +tour.isMoveOk(coordTest.x,coordTest.y));
+        coordTest = new Coord(2,5);
+        System.out.println("tour peut se déplacer à"+coordTest +"?->" +tour.isMoveOk(coordTest.x,coordTest.y));
+        
     }
 }

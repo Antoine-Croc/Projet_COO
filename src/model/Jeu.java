@@ -12,7 +12,7 @@ import tools.ChessPiecesFactory;
 public class Jeu {
 	private List<Pieces> list_pieces;
 	private Couleur couleur;
-
+	private boolean roque_roi  = false;
 	// constructor
 	public Jeu(Couleur couleur) {
 		this.list_pieces = ChessPiecesFactory.newPieces(couleur);
@@ -192,7 +192,30 @@ public class Jeu {
 		return result;
 	}
 	
-	
+	public void setCastling() {
+		Pieces piece_roi = null;
+		int position_y_roi = -1;
+		Set<Integer> position_y_tour = new HashSet<>();
+		
+		
+		Iterator<Pieces> ite = this.list_pieces.iterator();
+		while (ite.hasNext()) {
+			Pieces piece = ite.next();
+			if (piece.getClass().getSimpleName() == "Roi") {
+				position_y_roi = piece.getY();
+			}
+			if (piece.getClass().getSimpleName() == "Tour") {
+				position_y_tour.add(piece.getY());
+			}
+			
+		if(position_y_tour.contains(position_y_roi)) {
+			this.roque_roi=true;
+		}
+			
+		}
+		
+		
+	}
 	private Pieces findPiece(int xInit,int yInit) {
 		Pieces piece_resultat = null;
 		Iterator<Pieces> ite = this.list_pieces.iterator();
