@@ -95,15 +95,15 @@ public abstract class AbstractPiece implements Pieces{
         coordTest = new Coord(0,4);//false
         System.out.println("Reine peut se déplacer à"+coordTest +"?->" +reine.isMoveOk(coordTest.x,coordTest.y));
         
-        CavalierBis cavalier = new CavalierBis(Couleur.BLANC,coord);
+        Cavalier cavalier = new Cavalier(Couleur.BLANC,coord);
         System.out.println("-------------test"+cavalier+"-------------");
         coordTest = new Coord(3,1);
         System.out.println("cavalier peut se déplacer à"+coordTest +"?->" +cavalier.isMoveOk(coordTest.x,coordTest.y));
         coordTest = new Coord(1,1);
         System.out.println("cavalier peut se déplacer à"+coordTest +"?->" +cavalier.isMoveOk(coordTest.x,coordTest.y));
-        coordTest = new Coord(1,3);
+        coordTest = new Coord(1,3); 
         System.out.println("cavalier peut se déplacer à"+coordTest +"?->" +cavalier.isMoveOk(coordTest.x,coordTest.y));
-        coordTest = new Coord(0,3); //FALSE
+        coordTest = new Coord(0,3); //True
         System.out.println("cavalier peut se déplacer à"+coordTest +"?->" +cavalier.isMoveOk(coordTest.x,coordTest.y));
         
         FouBis fou = new FouBis(Couleur.BLANC,coord);
