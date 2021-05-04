@@ -38,12 +38,12 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 		//TODO faire valider le fonctionnement
 		List<PieceIHM> PieceIHM = new ArrayList<PieceIHM>(); //TODO vérifier si on a besoin d'une arrayList ou si un autre type nous conviendrait
 		Jeu Jeu = this.jeuBlanc;
-		for (int i=0;i<Jeu.getPieceIHM().size();i++) {
-			PieceIHM.add(Jeu.getPieceIHM().get(i)); //On récupère le i-eme élément
+		for (int i=0;i<Jeu.getPiecesIHM().size();i++) {
+			PieceIHM.add(Jeu.getPiecesIHM().get(i)); //On récupère le i-eme élément
 		}
-		Jeu Jeu = this.jeuNoir;
-		for (int i=0;i<Jeu.getPieceIHM().size();i++) {
-			PieceIHM.add(Jeu.getPieceIHM().get(i)); //On récupère le i-eme élément
+		Jeu = this.jeuNoir;
+		for (int i=0;i<Jeu.getPiecesIHM().size();i++) {
+			PieceIHM.add(Jeu.getPiecesIHM().get(i)); //On récupère le i-eme élément
 		}
 		//TODO vérifier comment donner des accès en écriture
 		return PieceIHM;
@@ -106,7 +106,8 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 					//TODO vérifier comment mettre en place le type
 					Jeu.pawnPromotion(xFinal,yFinal,type);
 				}
-				ret = Jeu.setPossibleCapture();//ret = true si capture possible
+				Jeu.setPossibleCapture();//ret = true si capture possible
+				ret = true;
 			}
 		}
 		//sinon deplacer la piece
