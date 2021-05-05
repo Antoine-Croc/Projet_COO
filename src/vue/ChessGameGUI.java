@@ -116,30 +116,11 @@ public class ChessGameGUI extends JFrame implements MouseListener ,MouseMotionLi
 		  panel = (JPanel)chessBoard.getComponent(56);
 		  panel.add(piece);
 		  
-		  piece = new JLabel( new ImageIcon("./images/pionBlancS.png") );
-		  panel = (JPanel)chessBoard.getComponent(48);
-		  panel.add(piece);
-		  piece = new JLabel( new ImageIcon("./images/pionBlancS.png") );
-		  panel = (JPanel)chessBoard.getComponent(49);
-		  panel.add(piece);
-		  piece = new JLabel( new ImageIcon("./images/pionBlancS.png") );
-		  panel = (JPanel)chessBoard.getComponent(50);
-		  panel.add(piece);
-		  piece = new JLabel( new ImageIcon("./images/pionBlancS.png") );
-		  panel = (JPanel)chessBoard.getComponent(51);
-		  panel.add(piece);
-		  piece = new JLabel( new ImageIcon("./images/pionBlancS.png") );
-		  panel = (JPanel)chessBoard.getComponent(52);
-		  panel.add(piece);
-		  piece = new JLabel( new ImageIcon("./images/pionBlancS.png") );
-		  panel = (JPanel)chessBoard.getComponent(53);
-		  panel.add(piece);
-		  piece = new JLabel( new ImageIcon("./images/pionBlancS.png") );
-		  panel = (JPanel)chessBoard.getComponent(54);
-		  panel.add(piece);
-		  piece = new JLabel( new ImageIcon("./images/pionBlancS.png") );
-		  panel = (JPanel)chessBoard.getComponent(55);
-		  panel.add(piece);
+		  for (int i = 48; i < 56; i++) {
+			  piece = new JLabel( new ImageIcon("./images/pionBlancS.png") );
+			  panel = (JPanel)chessBoard.getComponent(i);
+			  panel.add(piece);
+		  }
 		  
 		  }
 
