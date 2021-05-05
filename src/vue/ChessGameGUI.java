@@ -1,5 +1,6 @@
 package vue;
 
+<<<<<<< HEAD
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Observable;
@@ -72,6 +73,17 @@ public class ChessGameGUI extends JFrame implements MouseListener ,MouseMotionLi
 
 	
 		  }
+=======
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.util.Observable;
+import java.util.Observer;
+
+import javax.swing.JFrame;
+
+public class ChessGameGUI extends JFrame implements MouseListener,MouseMotionListener,Observer {
+>>>>>>> 5ee764881f71b7b80e821f4cd371b8e11cd70642
 
 	@Override
 	public void update(Observable o, Object arg) {
@@ -81,8 +93,12 @@ public class ChessGameGUI extends JFrame implements MouseListener ,MouseMotionLi
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
+<<<<<<< HEAD
 		  if (chessPiece == null) return;
 		  chessPiece.setLocation(e.getX() + xAdjustment, e.getY() + yAdjustment);
+=======
+		// TODO Auto-generated method stub
+>>>>>>> 5ee764881f71b7b80e821f4cd371b8e11cd70642
 		
 	}
 
@@ -100,6 +116,7 @@ public class ChessGameGUI extends JFrame implements MouseListener ,MouseMotionLi
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+<<<<<<< HEAD
 		 chessPiece = null;
 		  Component c =  chessBoard.findComponentAt(e.getX(), e.getY());
 		 
@@ -113,11 +130,15 @@ public class ChessGameGUI extends JFrame implements MouseListener ,MouseMotionLi
 		  chessPiece.setLocation(e.getX() + xAdjustment, e.getY() + yAdjustment);
 		  chessPiece.setSize(chessPiece.getWidth(), chessPiece.getHeight());
 		  layeredPane.add(chessPiece, JLayeredPane.DRAG_LAYER);
+=======
+		// TODO Auto-generated method stub
+>>>>>>> 5ee764881f71b7b80e821f4cd371b8e11cd70642
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
+<<<<<<< HEAD
 		  if(chessPiece == null) return;
 		  
 		  chessPiece.setVisible(false);
@@ -134,6 +155,9 @@ public class ChessGameGUI extends JFrame implements MouseListener ,MouseMotionLi
 		  }
 		 
 		  chessPiece.setVisible(true);
+=======
+		// TODO Auto-generated method stub
+>>>>>>> 5ee764881f71b7b80e821f4cd371b8e11cd70642
 		
 	}
 
@@ -148,6 +172,7 @@ public class ChessGameGUI extends JFrame implements MouseListener ,MouseMotionLi
 		// TODO Auto-generated method stub
 		
 	}
+<<<<<<< HEAD
 	
 	 public static void main(String[] args) {
 		 ChessGame chessGame;	
@@ -167,4 +192,6 @@ public class ChessGameGUI extends JFrame implements MouseListener ,MouseMotionLi
 		  frame.setLocationRelativeTo( null );
 		  frame.setVisible(true);
 		 }
+=======
+>>>>>>> 5ee764881f71b7b80e821f4cd371b8e11cd70642
 }
