@@ -9,6 +9,7 @@ import javax.swing.*;
 
 import controler.ChessGameControlers;
 import controler.controlerLocal.ChessGameControler;
+import model.Coord;
 import model.observable.ChessGame;
 
 public class ChessGameGUI extends JFrame implements MouseListener ,MouseMotionListener, Observer   {
@@ -82,30 +83,13 @@ public class ChessGameGUI extends JFrame implements MouseListener ,MouseMotionLi
 		  panel = (JPanel)chessBoard.getComponent(7);
 		  panel.add(piece);
 		  
-		  piece = new JLabel( new ImageIcon("./images/pionNoirS.png") );
-		  panel = (JPanel)chessBoard.getComponent(8);
-		  panel.add(piece);
-		  piece = new JLabel( new ImageIcon("./images/pionNoirS.png") );
-		  panel = (JPanel)chessBoard.getComponent(9);
-		  panel.add(piece);
-		  piece = new JLabel( new ImageIcon("./images/pionNoirS.png") );
-		  panel = (JPanel)chessBoard.getComponent(10);
-		  panel.add(piece);
-		  piece = new JLabel( new ImageIcon("./images/pionNoirS.png") );
-		  panel = (JPanel)chessBoard.getComponent(11);
-		  panel.add(piece);
-		  piece = new JLabel( new ImageIcon("./images/pionNoirS.png") );
-		  panel = (JPanel)chessBoard.getComponent(12);
-		  panel.add(piece);
-		  piece = new JLabel( new ImageIcon("./images/pionNoirS.png") );
-		  panel = (JPanel)chessBoard.getComponent(13);
-		  panel.add(piece);
-		  piece = new JLabel( new ImageIcon("./images/pionNoirS.png") );
-		  panel = (JPanel)chessBoard.getComponent(14);
-		  panel.add(piece);
-		  piece = new JLabel( new ImageIcon("./images/pionNoirS.png") );
-		  panel = (JPanel)chessBoard.getComponent(15);
-		  panel.add(piece);
+		  for (int i = 8; i < 16; i++) {
+			  piece = new JLabel( new ImageIcon("./images/pionNoirS.png") );
+			  panel = (JPanel)chessBoard.getComponent(i);
+			  panel.add(piece);
+		  }
+
+		 
 		  
 		  piece = new JLabel( new ImageIcon("./images/tourBlancS.png") );
 		  panel = (JPanel)chessBoard.getComponent(63);
@@ -220,7 +204,9 @@ public class ChessGameGUI extends JFrame implements MouseListener ,MouseMotionLi
 		  }
 		 
 		  chessPiece.setVisible(true);
-		
+		  
+
+	
 	}
 
 	@Override
@@ -235,22 +221,5 @@ public class ChessGameGUI extends JFrame implements MouseListener ,MouseMotionLi
 		
 	}
 	
-	 public static void main(String[] args) {
-		 ChessGame chessGame;	
-			ChessGameControlers chessGameControler;
-			JFrame frame;	
-			Dimension dim;
-		
-			dim = new Dimension(700, 700);
-			
-			chessGame = new ChessGame();	
-			chessGameControler = new ChessGameControler(chessGame);
-		 
-		  frame = new ChessGameGUI("Jeu d'echec", chessGameControler,  dim);
-		  frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE );
-		  frame.pack();
-		  frame.setResizable(true);
-		  frame.setLocationRelativeTo( null );
-		  frame.setVisible(true);
-		 }
+
 }
