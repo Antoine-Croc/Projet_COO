@@ -10,7 +10,9 @@ import javax.swing.*;
 import controler.ChessGameControlers;
 import controler.controlerLocal.ChessGameControler;
 import model.Coord;
+import model.Couleur;
 import model.observable.ChessGame;
+import tools.ChessImageProvider;
 
 public class ChessGameGUI extends JFrame implements MouseListener, MouseMotionListener, Observer {
 
@@ -53,47 +55,46 @@ public class ChessGameGUI extends JFrame implements MouseListener, MouseMotionLi
 
 			int row = (i / 8) % 2;
 			if (row == 0)
-				square.setBackground(i % 2 == 0 ? Color.blue : Color.white);
+				square.setBackground(i % 2 == 0 ? Color.white : Color.black);
 			else
-				square.setBackground(i % 2 == 0 ? Color.white : Color.blue);
+				square.setBackground(i % 2 == 0 ? Color.black : Color.white);
 		}
 		// Add a few pieces to the board
 
-		String color = "Noir";
-		String lettre_e = "e";
+
 		int i = 2;
 		int j = 1;
 		int k = 0;
 		JLabel piece = null;
 		JPanel panel = null;
+		Couleur color = Couleur.NOIR;
 		while (i > 0) {
-			piece = new JLabel(new ImageIcon("./images/tour" + color + lettre_e + "S.png"));
+			piece = new JLabel(new ImageIcon(ChessImageProvider.getImageFile("Tour", color)));
 			panel = (JPanel) chessBoard.getComponent(j == 1 ? 0 : 56);
 			panel.add(piece);
-			piece = new JLabel(new ImageIcon("./images/cavalier" + color + "S.png"));
+			piece = new JLabel(new ImageIcon(ChessImageProvider.getImageFile("Cavalier", color)));
 			panel = (JPanel) chessBoard.getComponent(j++);
 			panel.add(piece);
-			piece = new JLabel(new ImageIcon("./images/fou" + color + "S.png"));
+			piece = new JLabel(new ImageIcon(ChessImageProvider.getImageFile("Fou", color)));
 			panel = (JPanel) chessBoard.getComponent(j++);
 			panel.add(piece);
-			piece = new JLabel(new ImageIcon("./images/roi" + color + "S.png"));
+			piece = new JLabel(new ImageIcon(ChessImageProvider.getImageFile("Roi", color)));
 			panel = (JPanel) chessBoard.getComponent(j++);
 			panel.add(piece);
-			piece = new JLabel(new ImageIcon("./images/reine" + color + lettre_e + "S.png"));
+			piece = new JLabel(new ImageIcon(ChessImageProvider.getImageFile("Reine", color)));
 			panel = (JPanel) chessBoard.getComponent(j++);
 			panel.add(piece);
-			piece = new JLabel(new ImageIcon("./images/fou" + color + "S.png"));
+			piece = new JLabel(new ImageIcon(ChessImageProvider.getImageFile("Fou", color)));
 			panel = (JPanel) chessBoard.getComponent(j++);
 			panel.add(piece);
-			piece = new JLabel(new ImageIcon("./images/cavalier" + color + "S.png"));
+			piece = new JLabel(new ImageIcon(ChessImageProvider.getImageFile("Cavalier", color)));
 			panel = (JPanel) chessBoard.getComponent(j++);
 			panel.add(piece);
-			piece = new JLabel(new ImageIcon("./images/tour" + color + lettre_e + "S.png"));
+			piece = new JLabel(new ImageIcon(ChessImageProvider.getImageFile("Tour", color)));
 			panel = (JPanel) chessBoard.getComponent(j++);
 			panel.add(piece);
 
-			color = "Blanc";
-			lettre_e = "";
+			color = Couleur.BLANC;
 			i = i - 1;
 			j = 57;
 		}
@@ -102,13 +103,13 @@ public class ChessGameGUI extends JFrame implements MouseListener, MouseMotionLi
 		while (i > 0) {
 
 			for (j = k; j < k + 8; j++) {
-				piece = new JLabel(new ImageIcon("./images/pion" + color + "S.png"));
+				piece = new JLabel(new ImageIcon(ChessImageProvider.getImageFile("Pion", color)));
 				panel = (JPanel) chessBoard.getComponent(j);
 				panel.add(piece);
 			}
 			i--;
 			k = 8;
-			color = "Noir";
+			color = Couleur.NOIR;
 
 		}
 
