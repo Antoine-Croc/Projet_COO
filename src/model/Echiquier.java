@@ -82,25 +82,23 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 	
 	public boolean isMoveOk(int xInit, int yInit, int xFinal, int yFinal) {
 		boolean ret;
-		Jeu jeu;
+		Jeu jeuCourant;
+		Jeu jeuAdverse;
 		if (this.getColorCurrentPlayer() == Couleur.BLANC) {
-			jeu = this.jeuBlanc;
+			jeuCourant = this.jeuBlanc;
+			jeuAdverse = this.jeuNoir;
 		}
 		else {
-			jeu = this.jeuNoir;
+			jeuCourant = this.jeuNoir;
+			jeuAdverse = this.jeuBlanc;
 		}
 		//il n'existe pas de piece du jeu courant aux coordonnees initiales
-		if (!(jeu.isPieceHere(xInit,yInit))) {
-			ret = false;
-		}
-		
-		if (this.getPieceColor(xInit,yInit) != this.joueurCourant) {
-			this.setMessage("KO : c'est au tour de l'autre joueur");
+		if (!(jeuCourant.isPieceHere(xInit,yInit))) {
 			ret = false;
 		}
 		// les coordonnees finales ne sont pas valides ou egales aux initiales
 		//position finale ne correspond pas a algo de deplacement piece
-		else if (!(jeu.isMoveOk(xInit,yInit,xFinal,yFinal))) {
+		else if (!(jeuCourant.isMoveOk(xInit,yInit,xFinal,yFinal))) {
 			this.setMessage("KO : la position finale ne correspond pas a l'aglo de deplacement legal de la piece");
 			ret	= false;	
 		}
@@ -108,7 +106,7 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 		//il existe une piece intermediaire sur la trajectoire (sauf cavalier)
 		//TODO trouver la bonne fonction
 		/*
-		else if (Jeu.intermediatePiece()) {
+		else if (JeuCourant.intermediatePiece(xInit, yInit, xFinal, yFinal) || jeuAdverse.intermediatePiece(xInit, yInit, xFinal, yFinal)) {
 			if 	(Jeu.getPieceType(xInit,yInit).equals("Cavalier")) {
 				ret = true;
 			}
@@ -116,37 +114,33 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 		}
 		*/
 		//il existe une piece positionnees aux coordonnees finales :
-		else if (jeu.isPieceHere(xFinal,yFinal)) {
+		else if (jeuCourant.isPieceHere(xFinal,yFinal)) {
 			//si elle est de la meme couleur
-			if (jeu.getPieceColor(xInit,yInit) == (jeu.getPieceColor(xFinal,yFinal))){
-				if (jeu.getRoque()) {
+			if (jeuCourant.getRoque()) {
+				this.setMessage("Possibilité de roque");
 				ret = true;
-				}
-				this.setMessage("Piece présente aux coordonnees finales");
-				ret = false;
 			}
-			//sinon prendre la piece intermediaire (vigilance pour le cas du pion) et deplacer la piece
+			else if (jeuCourant.isPawnPromotion(xFinal,yFinal)) {
+				this.setMessage("Possibilité de promotion du pion");
+				ret = false; //A confirmer
+			}
 			else {
-				if (jeu.isPawnPromotion(xFinal,yFinal)) {
-					this.setMessage("Possibilité de promotion du pion");
-					ret = false;
-				}
-				if (this.getColorCurrentPlayer() == Couleur.BLANC) {
-					jeuNoir.setPossibleCapture();//ret = true si capture possible
-					this.setMessage("Capture set Noir");
-				}
-				else {
-					jeuBlanc.setPossibleCapture();
-					this.setMessage("Capture set Blanc");
-				}
-				ret = true;
+				ret = false;
+				this.setMessage("Piece présente aux coordonnees finales");
 			}
+		}
+			//sinon prendre la piece intermediaire (vigilance pour le cas du pion) et deplacer la piece		
+		else if (jeuAdverse.isPieceHere(xFinal, yFinal)) {
+			jeuAdverse.setPossibleCapture();
+			ret = true;
+			this.setMessage("OK : Deplacement + capture");
 		}
 		//sinon deplacer la piece
 		else {
-			this.setMessage("OK : Deplacement");
+			this.setMessage("OK : Deplacement simple");
 			ret = true;
 		}
+		
 		return ret;
 	}
 
@@ -154,28 +148,23 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 	public boolean move(int xInit, int yInit, int xFinal, int yFinal) {
 		//TODO implémentation de checkmatePossibility ?
 		boolean ret;
-		Jeu jeu;
+		Jeu jeuCourant;
+		Jeu jeuAdverse;
 		if (this.getColorCurrentPlayer() == Couleur.BLANC) {
-			jeu = this.jeuBlanc;
+			jeuCourant = this.jeuBlanc;
+			jeuAdverse = this.jeuNoir;
 		}
 		else {
-			jeu = this.jeuNoir;
+			jeuCourant = this.jeuNoir;
+			jeuAdverse = this.jeuBlanc;
 		}
 		if (this.isMoveOk(xInit, yInit, xFinal, yFinal)) {
-			jeu.move(xInit, yInit, xFinal, yFinal);
-			if (jeu.getCapturePossible()) {
-				jeu.capture(xFinal,yFinal);
-				String messageConcat = this.getMessage();
-				messageConcat += "+ capture";
-				this.setMessage(messageConcat);
-			}
-			else {
-				String messageConcat = this.getMessage();
-				messageConcat += " simple";
-				this.setMessage(messageConcat);
+			jeuCourant.move(xInit, yInit, xFinal, yFinal);
+			if (jeuAdverse.getCapturePossible()) {
+				jeuAdverse.capture(xFinal,yFinal);
 			}
 			ret = true;//Jusque la et si pas de possibilité de mise en échec, le déplacement est effectué
-			Coord KingCoord = jeu.getKingCoord();
+			Coord KingCoord = jeuCourant.getKingCoord();
 			/*
 			 //TODO implémenter possibilité échec et mat
 			if (jeu.checkmatePossibility()){ //Etude des possibilités de mise en échec
