@@ -154,14 +154,14 @@ public class Jeu {
 		boolean result = false;
 		if (this.capture_possible) {
 			Pieces piece = findPieces( xCatch, yCatch) ; 
+			
 			history_capture.addLast(piece);//ajouter la piece dans l'historique
 			history_capture.addLast(new Coord(xCatch,yCatch));//ajouter la position  dans l'historique
-			
+			System.out.println(piece);
 			piece.move(-1, -1); //deplacer la piece à (-1 -1)
 			this.capture_possible = false;
 			result = true;
 		}
-		
 		return result;
 	}
 
@@ -221,6 +221,19 @@ public class Jeu {
 			resultat = true;
 		} 
 		return resultat;
+	}
+	
+	public boolean intermediatePiece(int xInit,int yInit, int xFinal, int yFinal) {
+		int xChemin  = xFinal - xInit;
+		int yChemin  = yFinal - yInit;
+		if (xChemin == 0) {
+			for (int i = yInit+1; i < yFinal;i++) {
+				this.isPieceHere(xFinal,i);
+			}
+		}
+		//Vérifie si sur chacune des cases traversées, il y a ou non une pièce ou non
+		
+		return false;
 	}
 
 	
