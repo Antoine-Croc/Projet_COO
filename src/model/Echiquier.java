@@ -90,14 +90,18 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 			jeu = this.jeuNoir;
 		}
 		//il n'existe pas de piece du jeu courant aux coordonnees initiales
-		if (!(jeu.isPieceHere(xInit,yInit) || this.getPieceColor(xInit,yInit) != this.joueurCourant)) {
-			this.setMessage("Pas de pièces aux coordonnées initiales");
+		if (!(jeu.isPieceHere(xInit,yInit))) {
+			ret = false;
+		}
+		
+		if (this.getPieceColor(xInit,yInit) != this.joueurCourant) {
+			this.setMessage("KO : c'est au tour de l'autre joueur");
 			ret = false;
 		}
 		// les coordonnees finales ne sont pas valides ou egales aux initiales
 		//position finale ne correspond pas a algo de deplacement piece
 		else if (!(jeu.isMoveOk(xInit,yInit,xFinal,yFinal))) {
-			this.setMessage("Problème algo déplacement");
+			this.setMessage("KO : la position finale ne correspond pas a l'aglo de deplacement legal de la piece");
 			ret	= false;	
 		}
 	
@@ -127,22 +131,22 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 					this.setMessage("Possibilité de promotion du pion");
 					ret = false;
 				}
-				jeu.setPossibleCapture();//ret = true si capture possible
+				if (this.getColorCurrentPlayer() == Couleur.BLANC) {
+					jeuNoir.setPossibleCapture();//ret = true si capture possible
+					this.setMessage("Capture set Noir");
+				}
+				else {
+					jeuBlanc.setPossibleCapture();
+					this.setMessage("Capture set Blanc");
+				}
 				ret = true;
 			}
 		}
 		//sinon deplacer la piece
 		else {
+			this.setMessage("OK : Deplacement");
 			ret = true;
 		}
-		/*
-		if (ret) {
-			this.setMessage("Deplacement OK");
-		}
-		else {
-			this.setMessage("Deplacement interdit");
-		}
-		*/
 		return ret;
 	}
 
@@ -161,10 +165,14 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 			jeu.move(xInit, yInit, xFinal, yFinal);
 			if (jeu.getCapturePossible()) {
 				jeu.capture(xFinal,yFinal);
-				this.setMessage("Déplacement avec capture");
+				String messageConcat = this.getMessage();
+				messageConcat += "+ capture";
+				this.setMessage(messageConcat);
 			}
 			else {
-				this.setMessage("Déplacement sans capture");
+				String messageConcat = this.getMessage();
+				messageConcat += " simple";
+				this.setMessage(messageConcat);
 			}
 			ret = true;//Jusque la et si pas de possibilité de mise en échec, le déplacement est effectué
 			Coord KingCoord = jeu.getKingCoord();
