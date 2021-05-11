@@ -1,8 +1,7 @@
 ##ignore this file##
 
-/target/ 
 .metadata
 .settings
 .classpath
 
-bin/
+/bin/*
