@@ -142,25 +142,31 @@ public class ChessGameGUI extends JFrame implements MouseListener, MouseMotionLi
 	public void mousePressed(MouseEvent e) {
 		
 		Coord pressedCoord = convertCoord(e.getX(), e.getY(),true);
+		
 		if(chessGameControler.isPlayerOK(pressedCoord)){
-		chessPiece = null;
-		Component c = chessBoard.findComponentAt(e.getX(), e.getY());
-
-		if (c instanceof JPanel)
-			return;
-
-		Point parentLocation = c.getParent().getLocation();
-		xAdjustment = parentLocation.x - e.getX();
-		yAdjustment = parentLocation.y - e.getY();
-		chessPiece = (JLabel) c;
-		chessPiece.setLocation(e.getX() + xAdjustment, e.getY() + yAdjustment);
-		chessPiece.setSize(chessPiece.getWidth(), chessPiece.getHeight());
-		layeredPane.add(chessPiece, JLayeredPane.DRAG_LAYER);
-
-		// test
-		this.coord = convertCoord(e.getX(), e.getY(),true);
+			chessPiece = null;
+			Component c = chessBoard.findComponentAt(e.getX(), e.getY());
+	
+			if (c instanceof JPanel)
+				return;
+	
+			Point parentLocation = c.getParent().getLocation();
+			xAdjustment = parentLocation.x - e.getX();
+			yAdjustment = parentLocation.y - e.getY();
+			chessPiece = (JLabel) c;
+			chessPiece.setLocation(e.getX() + xAdjustment, e.getY() + yAdjustment);
+			chessPiece.setSize(chessPiece.getWidth(), chessPiece.getHeight());
+			layeredPane.add(chessPiece, JLayeredPane.DRAG_LAYER);
+	
+			// test
+			this.coord = convertCoord(e.getX(), e.getY(),true);
 
 		}
+		else {
+			System.out.println("KO: c'est au tour de l'autre joueur" + "\n"); // c'est au tour de l'autre joueur
+			
+		}
+
 	}
 	
 	@Override

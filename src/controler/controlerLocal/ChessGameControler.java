@@ -30,6 +30,7 @@ public class ChessGameControler extends AbstractChessGameControler {
 		if (this.getPieceColor(initCoord) == this.getColorCurrentPlayer()) {
 			ret = true;
 		}
+
 		return ret;
 	}
 	

@@ -50,6 +50,7 @@ public abstract class AbstractChessGameControler implements ChessGameControlers 
 			}
 
 		}
+		
 		return ret;
 	}
 

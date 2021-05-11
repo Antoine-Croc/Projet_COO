@@ -152,12 +152,16 @@ public class Jeu {
 	// true si la piece aux coordonnées finales a été capturée
 	public boolean capture(int xCatch, int yCatch) {
 		boolean result = false;
-		Pieces piece = findPieces( xCatch, yCatch) ; 
+		if (this.capture_possible) {
+			Pieces piece = findPieces( xCatch, yCatch) ; 
+			history_capture.addLast(piece);//ajouter la piece dans l'historique
+			history_capture.addLast(new Coord(xCatch,yCatch));//ajouter la position  dans l'historique
+			
+			piece.move(-1, -1); //deplacer la piece à (-1 -1)
+			this.capture_possible = false;
+			result = true;
+		}
 		
-		history_capture.addLast(piece);//ajouter la piece dans l'historique
-		history_capture.addLast(new Coord(xCatch,yCatch));//ajouter la position  dans l'historique
-		piece.move(-1, -1); //deplacer la piece à (-1 -1)
-		this.capture_possible = false;
 		return result;
 	}
 
