@@ -210,7 +210,7 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 	
 
 
-	// il ne vérifie pas la position  initiale et finale
+	// il ne calcule pas la position  initiale et finale
 	//valable que pour les deplacements droits
 	public  boolean inter_coord(int xinit,int  yinit,int xfinal,int yfinal) {
 		 int ychemin =yfinal-yinit;
@@ -228,8 +228,6 @@ public class Echiquier extends java.lang.Object implements BoardGames {
                  .limit(number_sequence)
                  .collect(Collectors.toList());
 		 
-		 System.out.println(x_list);
-		 System.out.println(y_list);
 		 for(int i =1 ;i<number_sequence;i++) {
 			 list_coord.add(new Coord(xinit+x_list.get(i),yinit+y_list.get(i) ));
 		 }
@@ -252,7 +250,8 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 		 System.out.println(echiquier.getPiecesIHM());
 		 System.out.println(echiquier.move(0, 7, 0, 5));
 		 System.out.println(echiquier.getPiecesIHM());
-		 
+		 echiquier.inter_coord(3,4,0,1);
+		 echiquier.inter_coord(3,4,0,7);
 	 }
 
 
