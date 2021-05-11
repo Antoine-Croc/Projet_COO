@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -16,10 +17,14 @@ public class Jeu {
 	private boolean roque_roi  = false;
 	private boolean capture_possible = false;
 	
+	private LinkedList<Coord> history_coord;//ex:{positionInit_1,positionFinal_1,  positionInit_2,positionFinal_2}
+	private LinkedList<Object>  history_capture ;//ex:{Tour,(1,2),  Roi,(2,2) , Rein,(3,2)}
 	// constructor
 	public Jeu(Couleur couleur) {
 		this.pieces = ChessPiecesFactory.newPieces(couleur);
 		this.couleur = couleur;
+		this.history_coord = new LinkedList<Coord>();
+		this.history_capture = new LinkedList<Object>();
 
 	}
 
@@ -47,10 +52,10 @@ public class Jeu {
 	public boolean getRoque() {
 		return this.roque_roi;
 	}
-	
 	public boolean getCapturePossible() {
 		return this.capture_possible;
 	}
+
 	@Override
 	public java.lang.String toString() {
 		String result = "";
@@ -120,34 +125,47 @@ public class Jeu {
 		if (piece !=null && piece.isMoveOk(xFinal, yFinal)) {
 			piece.move(xFinal, yFinal);
 			result = true;
+			//MAJ l'histoire de deplacements
+			this.history_coord.addLast(new Coord(xInit,yInit));
+			this.history_coord.addLast(new Coord(xFinal,yFinal));
+			
 		}
 
 		return result;
 
 	}
 
-// TODO in 2nd iteration
-	public void undoMove() {
 
+	public void undoMove() {
+		Coord finalCoord= this.history_coord.pollLast();
+		Coord initCoord= this.history_coord.pollLast();
+		move(finalCoord.x,finalCoord.y,initCoord.x,initCoord.y) ;
 	}
 
 //TODO  in 2nd iteration
 	// Si une capture d'une pièce de l'autre jeu est possible met à jour 1 booléen
 	public void setPossibleCapture() {
-		this.capture_possible = false;
+		this.capture_possible = true;
 	}
 
 //TODO in 2nd  iteration
 	// true si la piece aux coordonnées finales a été capturée
 	public boolean capture(int xCatch, int yCatch) {
 		boolean result = false;
-
+		Pieces piece = findPieces( xCatch, yCatch) ; 
+		
+		history_capture.addLast(piece);//ajouter la piece dans l'historique
+		history_capture.addLast(new Coord(xCatch,yCatch));//ajouter la position  dans l'historique
+		piece.move(-1, -1); //deplacer la piece à (-1 -1)
+		this.capture_possible = false;
 		return result;
 	}
 
 //TODO in 2nd  iteration
 	public void undoCapture() {
-
+		Coord coord =(Coord) history_capture.pollLast();
+		Pieces piece = (Pieces)history_capture.pollLast();
+		piece.move(coord.x,coord.y); //restorer la position
 	}
 
 	// couleur de la pièce aux coordonnées x, y
@@ -200,7 +218,9 @@ public class Jeu {
 		} 
 		return resultat;
 	}
+
 	
+//TODO setCastling
 	public void setCastling() {
 /*
 		Pieces piece_roi = null;
@@ -238,5 +258,14 @@ public class Jeu {
 		return piece_resultat;
 	}
 	
+	
+	 public static void main(String[] args) {
+		 
+		 Jeu jeu = new Jeu(Couleur.BLANC);
+		 System.out.println(jeu);
+		 System.out.println(jeu.move(0, 7, 0, 8));
+		 System.out.println(jeu);
+		 System.out.println(jeu.getPiecesIHM());
+	 }
 
 }

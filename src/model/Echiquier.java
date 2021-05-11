@@ -3,6 +3,7 @@ import model.Jeu;
 import model.PieceIHM;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Echiquier extends java.lang.Object implements BoardGames {
@@ -44,7 +45,7 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 	
 	public List<PieceIHM> getPiecesIHM(){
 		//TODO faire valider le fonctionnement
-		List<PieceIHM> PieceIHM = new ArrayList<PieceIHM>(); //TODO vérifier si on a besoin d'une arrayList ou si un autre type nous conviendrait
+		List<PieceIHM> PieceIHM = new LinkedList<PieceIHM>(); //TODO vérifier si on a besoin d'une arrayList ou si un autre type nous conviendrait
 		Jeu Jeu = this.jeuBlanc;
 		for (int i=0;i<Jeu.getPiecesIHM().size();i++) {
 			PieceIHM.add(Jeu.getPiecesIHM().get(i)); //On récupère le i-eme élément
@@ -211,7 +212,14 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 
 
 
-
+	 public static void main(String[] args) {
+		 
+		 Echiquier echiquier = new Echiquier();
+		 System.out.println(echiquier.getPiecesIHM());
+		 System.out.println(echiquier.move(0, 7, 0, 5));
+		 System.out.println(echiquier.getPiecesIHM());
+		 
+	 }
 
 
 
