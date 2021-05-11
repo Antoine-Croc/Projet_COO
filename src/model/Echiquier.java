@@ -5,6 +5,8 @@ import model.PieceIHM;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Echiquier extends java.lang.Object implements BoardGames {
 	// Noms a verifier
@@ -93,6 +95,7 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 		if (!(jeu.isPieceHere(xInit,yInit))) {
 			ret = false;
 		}
+		
 		
 		if (this.getPieceColor(xInit,yInit) != this.joueurCourant) {
 			this.setMessage("KO : c'est au tour de l'autre joueur");
@@ -217,7 +220,40 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 		return ret;
 	}
 	
-
+	// il ne vérifie pas la position  initiale et finale
+	//valable que pour les deplacements droits
+	public  boolean inter_coord(int xinit,int  yinit,int xfinal,int yfinal) {
+		 int ychemin =yfinal-yinit;
+		 int xchemin =xfinal-xinit;
+		 int x_inter = intervalle(xchemin);
+		 int y_inter = intervalle(ychemin);
+		 List<Coord> list_coord = new ArrayList<Coord>();
+		 
+		 int number_sequence = Math.max(Math.abs(xchemin), Math.abs(ychemin)) ;
+		 
+		 List<Integer> x_list = Stream.iterate(0, n -> n + x_inter)
+                 .limit(number_sequence)
+                 .collect(Collectors.toList());
+		 List<Integer> y_list = Stream.iterate(0, n -> n + y_inter)
+                 .limit(number_sequence)
+                 .collect(Collectors.toList());
+		 
+		 System.out.println(x_list);
+		 System.out.println(y_list);
+		 for(int i =1 ;i<number_sequence;i++) {
+			 list_coord.add(new Coord(xinit+x_list.get(i),yinit+y_list.get(i) ));
+		 }
+		 
+		 System.out.println(list_coord);
+		 
+		return false;
+		 
+	 }
+	 
+	 private int intervalle(int x) {
+		 if (x==0) {return 0;}
+		 return x >0? 1:-1;
+	 }
 
 
 	 public static void main(String[] args) {
@@ -226,7 +262,10 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 		 System.out.println(echiquier.getPiecesIHM());
 		 System.out.println(echiquier.move(0, 7, 0, 5));
 		 System.out.println(echiquier.getPiecesIHM());
-		 
+		 echiquier.inter_coord(2,0,7,0);
+		 echiquier.inter_coord(2,7,2,0);
+		 echiquier.inter_coord(7,0,3,4);
+		 echiquier.inter_coord(3,4,0,1);
 	 }
 
 
