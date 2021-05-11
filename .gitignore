@@ -2,3 +2,6 @@
 
 /target/ 
 .metadata
+bin/
+.settings
+.classpath
