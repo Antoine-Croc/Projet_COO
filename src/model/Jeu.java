@@ -35,7 +35,7 @@ public class Jeu {
 		return this.couleur;
 	}
 
-	// coordonnÈes du roi
+	// coordonn√©es du roi
 	public Coord getKingCoord() {
 		Coord coord = null;
 		Iterator<Pieces> ite = this.pieces.iterator();
@@ -64,9 +64,9 @@ public class Jeu {
 	}
 
 	/**
-	 * @return une vue de la liste des piËces en cours ne donnant que des accËs en
+	 * @return une vue de la liste des pi√®ces en cours ne donnant que des acc√®s en
 	 *         lecture sur des PieceIHM (type piece + couleur + liste de
-	 *         coordonnÈes)
+	 *         coordonn√©es)
 	 */
 	public List<PieceIHM> getPiecesIHM() {
 		PieceIHM newPieceIHM = null;
@@ -74,8 +74,8 @@ public class Jeu {
 
 		for (Pieces piece : pieces) {
 			boolean existe = false;
-			// si le type de piece existe dÈj‡ dans la liste de PieceIHM
-			// ajout des coordonnÈes de la piËce dans la liste de Coord de ce type
+			// si le type de piece existe d√©j√† dans la liste de PieceIHM
+			// ajout des coordonn√©es de la pi√®ce dans la liste de Coord de ce type
 			// si elle est toujours en jeu (x et y != -1)
 			for (PieceIHM pieceIHM : list) {
 				if ((pieceIHM.getTypePiece()).equals(piece.getClass().getSimpleName())) {
@@ -85,7 +85,7 @@ public class Jeu {
 					}
 				}
 			}
-			// sinon, crÈation d'une nouvelle PieceIHM si la piËce est toujours en jeu
+			// sinon, cr√©ation d'une nouvelle PieceIHM si la pi√®ce est toujours en jeu
 			if (!existe) {
 				if (piece.getX() != -1) {
 					newPieceIHM = new PieceIHM(piece.getClass().getSimpleName(), piece.getCouleur());
@@ -99,13 +99,13 @@ public class Jeu {
 
 	// methodes
 
-	// true si une piËce se trouve aux coordonn√©es indiqu√©es
+	// true si une pi√®ce se trouve aux coordonn√É¬©es indiqu√É¬©es
 	public boolean isPieceHere(int x, int y) {
 		return findPieces(x, y) != null;
 	}
 
 
-	// true si piece du jeu peut Ítre dÈplacÈe aux coordonnÈes finales, false sinon
+	// true si piece du jeu peut √™tre d√©plac√©e aux coordonn√©es finales, false sinon
 	public boolean isMoveOk(int xInit, int yInit, int xFinal, int yFinal) {
 		boolean result = false;
 		Pieces piece = findPieces( xInit, yInit) ; 
@@ -117,8 +117,8 @@ public class Jeu {
 		return result;
 	}
 
-//TODO  si dÈplacement piËce effectuÈ
-	// true si dÈplacement piËce effectuÈ
+//TODO  si d√©placement pi√®ce effectu√©
+	// true si d√©placement pi√®ce effectu√©
 	public boolean move(int xInit, int yInit, int xFinal, int yFinal) {
 		boolean result = false;
 		Pieces piece = findPieces( xInit, yInit) ; 
@@ -143,13 +143,13 @@ public class Jeu {
 	}
 
 //TODO  in 2nd iteration
-	// Si une capture d'une piËce de l'autre jeu est possible met ‡ jour 1 boolÈen
+	// Si une capture d'une pi√®ce de l'autre jeu est possible met √† jour 1 bool√©en
 	public void setPossibleCapture() {
 		this.capture_possible = true;
 	}
 
 //TODO in 2nd  iteration
-	// true si la piece aux coordonnÈes finales a ÈtÈ capturÈe
+	// true si la piece aux coordonn√©es finales a √©t√© captur√©e
 	public boolean capture(int xCatch, int yCatch) {
 		boolean result = false;
 		if (this.capture_possible) {
@@ -158,7 +158,7 @@ public class Jeu {
 			history_capture.addLast(piece);//ajouter la piece dans l'historique
 			history_capture.addLast(new Coord(xCatch,yCatch));//ajouter la position  dans l'historique
 			System.out.println(piece);
-			piece.move(-1, -1); //deplacer la piece ‡ (-1 -1)
+			piece.move(-1, -1); //deplacer la piece √† (-1 -1)
 			this.capture_possible = false;
 			result = true;
 		}
@@ -172,7 +172,7 @@ public class Jeu {
 		piece.move(coord.x,coord.y); //restorer la position
 	}
 
-	// couleur de la piËce aux coordonnÈes x, y
+	// couleur de la pi√®ce aux coordonn√©es x, y
 	public Couleur getPieceColor(int x, int y) {
 		Couleur couleur = null;
 		Pieces piece = findPieces( x, y) ; 
@@ -192,7 +192,7 @@ public class Jeu {
 		return nomType;
 
 	}
-//TODO ‡ voir
+//TODO √† voir
 	// true si on est bien dans le cas d'une promotion du pion
 	public boolean isPawnPromotion(int xFinal, int yFinal) {
 		Boolean resultat = false;
@@ -226,13 +226,65 @@ public class Jeu {
 	public boolean intermediatePiece(int xInit,int yInit, int xFinal, int yFinal) {
 		int xChemin  = xFinal - xInit;
 		int yChemin  = yFinal - yInit;
+		// D√©placement vertical
 		if (xChemin == 0) {
 			for (int i = yInit+1; i < yFinal;i++) {
-				this.isPieceHere(xFinal,i);
+				if (this.isPieceHere(xFinal,i)){
+					return true; //On a trouv√© une pi√®ce, on renvoie true
+				}
 			}
 		}
-		//VÈrifie si sur chacune des cases traversÈes, il y a ou non une piËce ou non
-		
+		//D√©placement horizontal
+		else if (yChemin == 0){
+			for (int i = xInit+1; i < xFinal;i++){//On parcourt toutes les cases de xInit+1 √† xFinal-1 
+				if (this.isPieceHere(yFinal,i)){
+					return true;
+				}
+			}
+		}
+		//VÔøΩrifie si sur chacune des cases traversÔøΩes, il y a ou non une piÔøΩce ou non
+		else {
+			if (xChemin > 0){
+				if (yChemin > 0){
+					for (int i = xInit+1; i < xFinal;i++){
+						for (int j = yinit+1; j < yFinal;j++){
+							if (Math.abs(i-xInit)==Math.abs(j-yInit) && this.isPieceHere(i,j)){
+								return true;
+							}
+						}
+					}
+				}
+				else {
+					for (int i = xInit+1; i < xFinal;i++){
+						for (int j = yinit-1; j > yFinal;j--){
+							if (Math.abs(i-xInit)==Math.abs(j+yInit) && this.isPieceHere(i,j)){
+								return true;
+							}
+						}
+					}
+				}	
+			}
+			else {
+				if (yChemin > 0){
+					for (int i = xInit-1; i > xFinal;i--){
+						for (int j = yinit+1; j < yFinal;j++){
+							if (Math.abs(i+xInit)==Math.abs(j-yInit) && this.isPieceHere(i,j)){
+								return true;
+							}
+						}
+					}
+				}
+				else {
+					for (int i = xInit-1; i > xFinal;i--){
+						for (int j = yinit-1; j > yFinal;j--){
+							if (Math.abs(i+xInit)==Math.abs(j+yInit) && this.isPieceHere(i,j)){
+								return true;
+							}
+						}
+					}
+				}
+			}
+		}
 		return false;
 	}
 
