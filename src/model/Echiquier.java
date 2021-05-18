@@ -3,6 +3,7 @@ import model.Jeu;
 import model.PieceIHM;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -208,11 +209,26 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 		return ret;
 	}
 	
+	// verifier s'il y a des pieces sur le chemin, true = Si, false = Non
+	private boolean check_inter_pieces(List<Coord> listCoord) {
 
+		Coord coord = null;
+		Iterator<Coord> ite = listCoord.iterator();
+		while(ite.hasNext()) {
+			coord = ite.next();
+			//s'il existe une piece noire/blanche sur le chemin
+			if( this.jeuBlanc.isPieceHere(coord.x, coord.y)
+					|| this.jeuNoir.isPieceHere(coord.x, coord.y)) {
+				return true;
+			}
+		}
+		//sinon
+		return false;
+	}
 
 	// il ne calcule pas la position  initiale et finale
 	//valable que pour les deplacements droits
-	public  List<Coord>  inter_coord(int xinit,int  yinit,int xfinal,int yfinal) {
+	private  List<Coord>  inter_coord(int xinit,int  yinit,int xfinal,int yfinal) {
 		 int ychemin =yfinal-yinit;
 		 int xchemin =xfinal-xinit;
 		 int x_inter = intervalle(xchemin);
@@ -232,7 +248,7 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 			 list_coord.add(new Coord(xinit+x_list.get(i),yinit+y_list.get(i) ));
 		 }
 		 
-		 System.out.println(list_coord);
+		
 		 
 		return list_coord;
 		 
@@ -250,8 +266,8 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 		 System.out.println(echiquier.getPiecesIHM());
 		 System.out.println(echiquier.move(0, 7, 0, 5));
 		 System.out.println(echiquier.getPiecesIHM());
-		 echiquier.inter_coord(3,4,0,1);
-		 echiquier.inter_coord(3,4,0,7);
+		 System.out.println( echiquier.inter_coord(3,4,0,1));
+		 System.out.println(echiquier.inter_coord(3,4,0,7));
 	 }
 
 
