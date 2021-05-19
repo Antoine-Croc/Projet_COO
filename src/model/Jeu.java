@@ -247,7 +247,7 @@ public class Jeu {
 			if (xChemin > 0){
 				if (yChemin > 0){
 					for (int i = xInit+1; i < xFinal;i++){
-						for (int j = yinit+1; j < yFinal;j++){
+						for (int j = yInit+1; j < yFinal;j++){
 							if (Math.abs(i-xInit)==Math.abs(j-yInit) && this.isPieceHere(i,j)){
 								return true;
 							}
@@ -256,7 +256,7 @@ public class Jeu {
 				}
 				else {
 					for (int i = xInit+1; i < xFinal;i++){
-						for (int j = yinit-1; j > yFinal;j--){
+						for (int j = yInit-1; j > yFinal;j--){
 							if (Math.abs(i-xInit)==Math.abs(j+yInit) && this.isPieceHere(i,j)){
 								return true;
 							}
@@ -267,7 +267,7 @@ public class Jeu {
 			else {
 				if (yChemin > 0){
 					for (int i = xInit-1; i > xFinal;i--){
-						for (int j = yinit+1; j < yFinal;j++){
+						for (int j = yInit+1; j < yFinal;j++){
 							if (Math.abs(i+xInit)==Math.abs(j-yInit) && this.isPieceHere(i,j)){
 								return true;
 							}
@@ -276,7 +276,7 @@ public class Jeu {
 				}
 				else {
 					for (int i = xInit-1; i > xFinal;i--){
-						for (int j = yinit-1; j > yFinal;j--){
+						for (int j = yInit-1; j > yFinal;j--){
 							if (Math.abs(i+xInit)==Math.abs(j+yInit) && this.isPieceHere(i,j)){
 								return true;
 							}

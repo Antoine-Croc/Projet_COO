@@ -108,14 +108,14 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 	
 		//il existe une piece intermediaire sur la trajectoire (sauf cavalier)
 		//TODO trouver la bonne fonction
-		/*
-		else if (JeuCourant.intermediatePiece(xInit, yInit, xFinal, yFinal) || jeuAdverse.intermediatePiece(xInit, yInit, xFinal, yFinal)) {
-			if 	(Jeu.getPieceType(xInit,yInit).equals("Cavalier")) {
-				ret = true;
-			}
+		
+		else if ( !(jeuCourant.getPieceType(xInit, yInit).equals("Cavalier"))
+				&& this.check_inter_pieces(this.inter_coord(xInit, yInit, xFinal, yFinal)) ) {
+			
+
 			ret = false;
 		}
-		*/
+		
 		//il existe une piece positionnees aux coordonnees finales :
 		else if (jeuCourant.isPieceHere(xFinal,yFinal)) {
 			//si elle est de la meme couleur
@@ -268,6 +268,7 @@ public class Echiquier extends java.lang.Object implements BoardGames {
 		 System.out.println(echiquier.getPiecesIHM());
 		 System.out.println( echiquier.inter_coord(3,4,0,1));
 		 System.out.println(echiquier.inter_coord(3,4,0,7));
+		 
 	 }
 
 

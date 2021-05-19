@@ -19,10 +19,12 @@ public class Emission implements Runnable {
 		sc = new Scanner(System.in);
 
 		while(true){
+			
 			System.out.print("Votre message : ");
 			message = sc.nextLine();
 			out.println(message);
 			out.flush();
+			
 		}
 	}
 }
