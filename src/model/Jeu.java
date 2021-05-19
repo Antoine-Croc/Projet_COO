@@ -222,73 +222,7 @@ public class Jeu {
 		} 
 		return resultat;
 	}
-	
-	public boolean intermediatePiece(int xInit,int yInit, int xFinal, int yFinal) {
-		int xChemin  = xFinal - xInit;
-		int yChemin  = yFinal - yInit;
-		// Déplacement vertical
-		if (xChemin == 0) {
-			for (int i = yInit+1; i < yFinal;i++) {
-				if (this.isPieceHere(xFinal,i)){
-					return true; //On a trouvé une pièce, on renvoie true
-				}
-			}
-		}
-		//Déplacement horizontal
-		else if (yChemin == 0){
-			for (int i = xInit+1; i < xFinal;i++){//On parcourt toutes les cases de xInit+1 à xFinal-1 
-				if (this.isPieceHere(yFinal,i)){
-					return true;
-				}
-			}
-		}
-		//V�rifie si sur chacune des cases travers�es, il y a ou non une pi�ce ou non
-		else {
-			if (xChemin > 0){
-				if (yChemin > 0){
-					for (int i = xInit+1; i < xFinal;i++){
-						for (int j = yInit+1; j < yFinal;j++){
-							if (Math.abs(i-xInit)==Math.abs(j-yInit) && this.isPieceHere(i,j)){
-								return true;
-							}
-						}
-					}
-				}
-				else {
-					for (int i = xInit+1; i < xFinal;i++){
-						for (int j = yInit-1; j > yFinal;j--){
-							if (Math.abs(i-xInit)==Math.abs(j+yInit) && this.isPieceHere(i,j)){
-								return true;
-							}
-						}
-					}
-				}	
-			}
-			else {
-				if (yChemin > 0){
-					for (int i = xInit-1; i > xFinal;i--){
-						for (int j = yInit+1; j < yFinal;j++){
-							if (Math.abs(i+xInit)==Math.abs(j-yInit) && this.isPieceHere(i,j)){
-								return true;
-							}
-						}
-					}
-				}
-				else {
-					for (int i = xInit-1; i > xFinal;i--){
-						for (int j = yInit-1; j > yFinal;j--){
-							if (Math.abs(i+xInit)==Math.abs(j+yInit) && this.isPieceHere(i,j)){
-								return true;
-							}
-						}
-					}
-				}
-			}
-		}
-		return false;
-	}
 
-	
 //TODO setCastling
 	public void setCastling() {
 /*
